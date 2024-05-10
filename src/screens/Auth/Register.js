@@ -4,6 +4,8 @@ import {
   StyleSheet,
   Text,
   TouchableOpacity,
+  KeyboardAvoidingView,
+  Platform,
   View,
 } from "react-native";
 import AuthSteppedHeaderComponents from "../../components/AuthSteppedHeaderComponents";
@@ -13,9 +15,10 @@ import RegisterCompanyPhoneForm from "../../components/Forms/Register/RegisterCo
 import { Ionicons } from "@expo/vector-icons";
 import RegisterOTPVerifyForm from "../../components/Forms/Register/RegisterOTPVerifyForm";
 import RegisterPasswordForm from "../../components/Forms/Register/RegisterPasswordForm";
+import RegisterCompanyDetailsForm from "../../components/Forms/Register/RegisterCompanyDetailsForm";
 
 const Register = ({ navigation }) => {
-  const [activeFlowTab, setActiveFlowTab] = useState(1);
+  const [activeFlowTab, setActiveFlowTab] = useState(5);
   const [state, setState] = useState({
     companyEmail: "",
     companyPhone: "",
@@ -27,29 +30,96 @@ const Register = ({ navigation }) => {
     companyPhone: "",
     otp: "",
     password: {
-      criteria_1: false,
-      criteria_2: false,
-      criteria_3: false,
-      criteria_4: false,
+      criteria_1: "",
+      criteria_2: "",
+      criteria_3: "",
+      criteria_4: "",
+      nullError: "",
     },
   });
-  const [nextButtonDisable, setNextButtonDisable] = useState(true);
 
-  useEffect(() => {
-    setNextButtonDisable(true);
-    if (!error.companyEmail && state.companyEmail && activeFlowTab === 1) {
-      setNextButtonDisable(false);
+  const handleNextButtonClick = () => {
+    if (activeFlowTab === 1) {
+      if (state.companyEmail) {
+        const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+        if (!emailRegex.test(state.companyEmail)) {
+          setError({ companyEmail: "Enter a valid email" });
+        } else {
+          setError({ companyEmail: "" });
+          setActiveFlowTab((active) => active + 1);
+        }
+      } else {
+        setError({ companyEmail: "Email id is required" });
+      }
+    } else if (activeFlowTab === 2) {
+      if (state.companyPhone) {
+        const phoneRegex = /^\d{10}$/; // Matches a 10-digit number
+        if (!phoneRegex.test(state.companyPhone)) {
+          setError({ companyPhone: "Enter a valid phone number" });
+        } else {
+          setError({ companyPhone: "" });
+          setActiveFlowTab((active) => active + 1);
+        }
+      } else {
+        setError({ companyPhone: "Phone number is required" });
+      }
+    } else if (activeFlowTab === 3) {
+      if (state.otp) {
+        if (state.otp.length === 6) {
+          if (state.otp !== "123456") {
+            setError({ otp: "Incorrect OTP. Please check and try again." });
+          } else {
+            setError({ otp: "" });
+            setActiveFlowTab((active) => active + 1);
+          }
+        } else {
+          setError({ otp: "Incorrect OTP. Please check and try again" });
+        }
+      } else {
+        setError({ otp: "Incorrect OTP. Please check and try again" });
+      }
+    } else if (activeFlowTab === 4) {
+      const atLeast8LetterRegex = /^.{8,}$/;
+      const bothLowerAndUpperCaseRegex = /^(?=.*[a-z])(?=.*[A-Z])/;
+      const atLeast1NumberRegex = /^(?=.*\d)/;
+      const atLeast1SymbolRegex = /^(?=.*[!@#$%^&*()_+{}\[\]:;<>,.?/~])/;
+
+      if (state.password) {
+        setError((prevError) => ({
+          ...prevError,
+          password: {
+            nullError: "",
+            criteria_1: !atLeast8LetterRegex.test(state.password)
+              ? "red"
+              : "green",
+            criteria_2: !bothLowerAndUpperCaseRegex.test(state.password)
+              ? "red"
+              : "green",
+            criteria_3: !atLeast1NumberRegex.test(state.password)
+              ? "red"
+              : "green",
+            criteria_4: !atLeast1SymbolRegex.test(state.password)
+              ? "red"
+              : "green",
+          },
+        }));
+        if (
+          error.password?.criteria_1 == "green" &&
+          error.password?.criteria_2 == "green" &&
+          error.password?.criteria_3 == "green" &&
+          error.password?.criteria_4 == "green"
+        ) {
+          setActiveFlowTab((active) => active + 1);
+        }
+      } else {
+        setError((prevError) => ({
+          ...prevError,
+          password: { nullError: "Create new Password" },
+        }));
+      }
+    } else {
     }
-    if (!error.companyPhone && state.companyPhone && activeFlowTab === 2) {
-      setNextButtonDisable(false);
-    }
-    if (!error.otp && state.otp && activeFlowTab === 3) {
-      setNextButtonDisable(false);
-    }
-    if (!error.password && state.password && activeFlowTab === 4) {
-      setNextButtonDisable(false);
-    }
-  }, [error, activeFlowTab, state]);
+  };
   const handleChangeBackNavigation = () => {
     setActiveFlowTab((active) => active - 1);
   };
@@ -70,38 +140,14 @@ const Register = ({ navigation }) => {
       [fieldName]: value,
     }));
     if (fieldName === "companyEmail") {
-      const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
-      if (!emailRegex.test(value)) {
-        setError({ companyEmail: "Enter a valid email" });
-      } else {
-        setError({ companyEmail: "" });
-      }
-      if (value == "") {
-        setError({ companyEmail: "" });
-      }
+      setError({ companyEmail: "" });
     }
     if (fieldName === "companyPhone") {
-      const phoneRegex = /^\d{10}$/; // Matches a 10-digit number
-      if (!phoneRegex.test(value)) {
-        setError({ companyPhone: "Enter a valid phone number" });
-      } else {
-        setError({ companyPhone: "" });
-      }
-      if (value == "") {
-        setError({ companyPhone: "" });
-      }
+      setError({ companyPhone: "" });
     }
 
     if (fieldName === "otp") {
-      if (value.length === 6) {
-        if (value !== "123456") {
-          setError({ otp: "Incorrect OTP. Please check and try again." });
-        } else {
-          setError({ otp: "" });
-        }
-      } else {
-        setError({ otp: "" });
-      }
+      setError({ otp: "" });
     }
     if (fieldName === "password") {
       const atLeast8LetterRegex = /^.{8,}$/;
@@ -112,10 +158,10 @@ const Register = ({ navigation }) => {
       setError((prevError) => ({
         ...prevError,
         password: {
-          criteria_1: atLeast8LetterRegex.test(value),
-          criteria_2: bothLowerAndUpperCaseRegex.test(value),
-          criteria_3: atLeast1NumberRegex.test(value),
-          criteria_4: atLeast1SymbolRegex.test(value),
+          criteria_1: atLeast8LetterRegex.test(value) && "green",
+          criteria_2: bothLowerAndUpperCaseRegex.test(value) && "green",
+          criteria_3: atLeast1NumberRegex.test(value) && "green",
+          criteria_4: atLeast1SymbolRegex.test(value) && "green",
         },
       }));
     }
@@ -130,14 +176,14 @@ const Register = ({ navigation }) => {
       />
 
       <View style={styles.container}>
-        <View style={styles.section}>
-          <View style={{ flex: 9 }}>
+        <View style={{ flex: 9 }}>
+          <View style={styles.section}>
             {activeFlowTab === 1 && (
-              <View>
+              <View style={{ flex: 1 }}>
                 <RegisterCompanyNameForm
                   value={state.companyEmail}
                   onChangeText={handleChange("companyEmail")}
-                  errorInput={error.companyEmail && state.companyEmail}
+                  errorInput={error.companyEmail}
                 />
 
                 {error?.companyEmail && (
@@ -158,6 +204,39 @@ const Register = ({ navigation }) => {
                     </Text>
                   </View>
                 )}
+                <View
+                  style={{
+                    flex: 1,
+                    justifyContent: "flex-end",
+                    alignItems: "center",
+                    marginBottom: 10,
+                  }}
+                >
+                  <Text>By registering, you agree to our</Text>
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      justifyContent: "space-evenly",
+                      gap: 40,
+                    }}
+                  >
+                    <TouchableOpacity>
+                      <Text style={{ fontWeight: "700", color: COLORS.brand }}>
+                        T&Cs
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text style={{ fontWeight: "700", color: COLORS.brand }}>
+                        Privacy Policy
+                      </Text>
+                    </TouchableOpacity>
+                    <TouchableOpacity>
+                      <Text style={{ fontWeight: "700", color: COLORS.brand }}>
+                        Data Protection Policy
+                      </Text>
+                    </TouchableOpacity>
+                  </View>
+                </View>
               </View>
             )}
             {activeFlowTab === 2 && (
@@ -165,7 +244,7 @@ const Register = ({ navigation }) => {
                 <RegisterCompanyPhoneForm
                   value={state.companyPhone}
                   onChangeText={handleChange("companyPhone")}
-                  errorInput={error.companyPhone && state.companyPhone}
+                  errorInput={error.companyPhone}
                 />
                 {error.companyPhone && (
                   <View
@@ -192,7 +271,7 @@ const Register = ({ navigation }) => {
                 <RegisterOTPVerifyForm
                   phoneNumber={maskedPhoneNumber(state.companyPhone)}
                   onChangeText={handleChange("otp")}
-                  errorInput={error.otp && state.otp}
+                  errorInput={error.otp}
                 />
                 {error.otp && (
                   <View
@@ -237,36 +316,62 @@ const Register = ({ navigation }) => {
                   value={state.password}
                   onChangeText={handleChange("password")}
                   errorInput={
-                    (!error.password?.criteria_1 ||
-                      !error.password?.criteria_2 ||
-                      !error.password?.criteria_3 ||
-                      !error.password?.criteria_4) &&
-                    state.password
+                    error.password?.criteria_1 == "red" ||
+                    !error.password?.criteria_2 == "red" ||
+                    !error.password?.criteria_3 == "red" ||
+                    !error.password?.criteria_4 == "red" ||
+                    error.password?.nullError
                   }
                 />
-                {error.password && state.password && (
+                {error.password?.nullError && !state.password && (
+                  <View
+                    style={{
+                      flexDirection: "row",
+                      alignItems: "center",
+                    }}
+                  >
+                    <Ionicons
+                      name="alert-circle-outline"
+                      size={16}
+                      color={COLORS.red}
+                      style={{ marginRight: 5 }}
+                    />
+                    <Text style={{ fontSize: 12, color: COLORS.red }}>
+                      {error.password?.nullError}
+                    </Text>
+                  </View>
+                )}
+                {state.password && (
                   <View>
                     <View
                       style={{ flexDirection: "row", alignItems: "center" }}
                     >
                       <Ionicons
                         name={
-                          error.password?.criteria_1
+                          error.password?.criteria_1 == "green"
                             ? "checkmark"
+                            : error.password?.criteria_1 == "red"
+                            ? "alert-circle-outline"
                             : "radio-button-on"
                         }
                         size={7}
                         color={
-                          error.password?.criteria_1 ? COLORS.green : COLORS.red
+                          error.password?.criteria_1 == "green"
+                            ? COLORS.green
+                            : error.password?.criteria_1 == "red"
+                            ? COLORS.red
+                            : COLORS.black
                         }
                         style={{ marginRight: 10 }}
                       />
                       <Text
                         style={[
                           { justifyContent: "center" },
-                          error.password?.criteria_1
+                          error.password?.criteria_1 == "green"
                             ? { color: COLORS.green }
-                            : { color: COLORS.red },
+                            : error.password?.criteria_1 == "red"
+                            ? { color: COLORS.red }
+                            : { color: COLORS.black },
                         ]}
                       >
                         Contains at least 8 characters
@@ -277,22 +382,30 @@ const Register = ({ navigation }) => {
                     >
                       <Ionicons
                         name={
-                          error.password?.criteria_2
+                          error.password?.criteria_2 == "green"
                             ? "checkmark"
+                            : error.password?.criteria_2 == "red"
+                            ? "alert-circle-outline"
                             : "radio-button-on"
                         }
                         size={7}
                         color={
-                          error.password?.criteria_2 ? COLORS.green : COLORS.red
+                          error.password?.criteria_2 == "green"
+                            ? COLORS.green
+                            : error.password?.criteria_2 == "red"
+                            ? COLORS.red
+                            : COLORS.black
                         }
                         style={{ marginRight: 10 }}
                       />
                       <Text
                         style={[
                           { justifyContent: "center" },
-                          error.password?.criteria_2
+                          error.password?.criteria_2 == "green"
                             ? { color: COLORS.green }
-                            : { color: COLORS.red },
+                            : error.password?.criteria_2 == "red"
+                            ? { color: COLORS.red }
+                            : { color: COLORS.black },
                         ]}
                       >
                         Contains both lower (a-z) and upper case letters (A-Z)
@@ -303,22 +416,30 @@ const Register = ({ navigation }) => {
                     >
                       <Ionicons
                         name={
-                          error.password?.criteria_3
+                          error.password?.criteria_3 == "green"
                             ? "checkmark"
+                            : error.password?.criteria_3 == "red"
+                            ? "alert-circle-outline"
                             : "radio-button-on"
                         }
                         size={7}
                         color={
-                          error.password?.criteria_3 ? COLORS.green : COLORS.red
+                          error.password?.criteria_3 == "green"
+                            ? COLORS.green
+                            : error.password?.criteria_3 == "red"
+                            ? COLORS.red
+                            : COLORS.black
                         }
                         style={{ marginRight: 10 }}
                       />
                       <Text
                         style={[
                           { justifyContent: "center" },
-                          error.password?.criteria_3
+                          error.password?.criteria_3 == "green"
                             ? { color: COLORS.green }
-                            : { color: COLORS.red },
+                            : error.password?.criteria_3 == "red"
+                            ? { color: COLORS.red }
+                            : { color: COLORS.black },
                         ]}
                       >
                         Contains at least one number (0-9)
@@ -329,22 +450,30 @@ const Register = ({ navigation }) => {
                     >
                       <Ionicons
                         name={
-                          error.password?.criteria_4
+                          error.password?.criteria_4 == "green"
                             ? "checkmark"
+                            : error.password?.criteria_4 == "red"
+                            ? "alert-circle-outline"
                             : "radio-button-on"
                         }
                         size={7}
                         color={
-                          error.password?.criteria_4 ? COLORS.green : COLORS.red
+                          error.password?.criteria_4 == "green"
+                            ? COLORS.green
+                            : error.password?.criteria_4 == "red"
+                            ? COLORS.red
+                            : COLORS.black
                         }
                         style={{ marginRight: 10 }}
                       />
                       <Text
                         style={[
                           { justifyContent: "center" },
-                          error.password?.criteria_4
+                          error.password?.criteria_4 == "green"
                             ? { color: COLORS.green }
-                            : { color: COLORS.red },
+                            : error.password?.criteria_4 == "red"
+                            ? { color: COLORS.red }
+                            : { color: COLORS.black },
                         ]}
                       >
                         Contains at least one symbol
@@ -354,22 +483,26 @@ const Register = ({ navigation }) => {
                 )}
               </View>
             )}
+            {activeFlowTab === 5 && (
+              <View>
+                <RegisterCompanyDetailsForm value={{ name: "" }} />
+              </View>
+            )}
           </View>
-          <View style={{ flex: 1, justifyContent: "flex-end" }}>
+        </View>
+        <View
+          style={{
+            flex: 0.7,
+            backgroundColor: COLORS.white,
+          }}
+        >
+          <View style={{ ...styles.section, justifyContent: "center" }}>
             <TouchableOpacity
-              style={[
-                nextButtonDisable
-                  ? styles.disableMainButton
-                  : styles.mainButton,
-              ]}
-              onPress={() => setActiveFlowTab((active) => active + 1)}
+              style={styles.mainButton}
+              onPress={() => handleNextButtonClick()}
             >
               <Text
-                style={
-                  nextButtonDisable
-                    ? { fontSize: 14, fontWeight: "700", color: COLORS.grey }
-                    : { fontSize: 14, fontWeight: "700", color: COLORS.white }
-                }
+                style={{ fontSize: 14, fontWeight: "700", color: COLORS.white }}
               >
                 Next
               </Text>
@@ -401,7 +534,6 @@ const styles = StyleSheet.create({
     paddingTop: 10,
     paddingBottom: 10,
     borderRadius: 50,
-    marginBottom: 20,
   },
   disableMainButton: {
     backgroundColor: COLORS.shadeBrand,

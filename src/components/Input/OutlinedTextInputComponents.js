@@ -19,6 +19,7 @@ const OutlinedTextInput = ({
   numericOnly,
   password,
   errorInput,
+  buttonType,
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -71,17 +72,21 @@ const OutlinedTextInput = ({
           </View>
         )}
         <View style={phone ? { flex: 8 } : { flex: 9.2 }}>
-          <TextInput
-            style={[styles.input, disabled ? styles.inputDisabled : null]}
-            value={value}
-            onChangeText={onChangeText}
-            onFocus={handleFocus}
-            onBlur={handleBlur}
-            editable={!disabled} // Disable input if 'disabled' is true
-            maxLength={maxLength || 200}
-            keyboardType={numericOnly ? "numeric" : "default"}
-            secureTextEntry={!showPassword && password}
-          />
+          {buttonType ? (
+            <View style={{ ...styles.input, height: 35 }} />
+          ) : (
+            <TextInput
+              style={[styles.input, disabled ? styles.inputDisabled : null]}
+              value={value}
+              onChangeText={onChangeText}
+              onFocus={handleFocus}
+              onBlur={handleBlur}
+              editable={!disabled} // Disable input if 'disabled' is true
+              maxLength={maxLength || 200}
+              keyboardType={numericOnly ? "numeric" : "default"}
+              secureTextEntry={!showPassword && password}
+            />
+          )}
         </View>
 
         <View
@@ -96,9 +101,11 @@ const OutlinedTextInput = ({
               />
             </TouchableOpacity>
           ) : (
-            <TouchableOpacity onPress={() => onChangeText("")}>
-              <Ionicons name="close-circle-outline" size={20} color="grey" />
-            </TouchableOpacity>
+            value && (
+              <TouchableOpacity onPress={() => onChangeText("")}>
+                <Ionicons name="close-circle-outline" size={20} color="grey" />
+              </TouchableOpacity>
+            )
           )}
         </View>
       </View>

@@ -6,7 +6,7 @@ import RegisterAddressModal from "../../Modal/RegisterAddressModal";
 
 const RegisterCompanyDetailsForm = ({ value, onChangeText, errorInput }) => {
   const [state, setState] = useState({
-    companyName: value.companyName || "",
+    companyName: value?.companyName || "",
     registeredAddress: value.registeredAddress || "",
     tradingBusinessName: value.tradingBusinessName || "",
     tradingBusinessAddress: value.tradingBusinessAddress || "",

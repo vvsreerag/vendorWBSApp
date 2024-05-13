@@ -16,9 +16,12 @@ import { Ionicons } from "@expo/vector-icons";
 import RegisterOTPVerifyForm from "../../components/Forms/Register/RegisterOTPVerifyForm";
 import RegisterPasswordForm from "../../components/Forms/Register/RegisterPasswordForm";
 import RegisterCompanyDetailsForm from "../../components/Forms/Register/RegisterCompanyDetailsForm";
+import RegisterContactInfoForm from "../../components/Forms/Register/RegisterContactInfoForm";
+import RegisterDocumentForm from "../../components/Forms/Register/RegisterDocumentForm";
+import RegisterBankDetailsForm from "../../components/Forms/Register/RegisterBankDetailsForm";
 
 const Register = ({ navigation }) => {
-  const [activeFlowTab, setActiveFlowTab] = useState(5);
+  const [activeFlowTab, setActiveFlowTab] = useState(1);
   const [state, setState] = useState({
     companyEmail: "",
     companyPhone: "",
@@ -118,6 +121,7 @@ const Register = ({ navigation }) => {
         }));
       }
     } else {
+      setActiveFlowTab((active) => active + 1);
     }
   };
   const handleChangeBackNavigation = () => {
@@ -170,7 +174,7 @@ const Register = ({ navigation }) => {
     <View style={{ flex: 1 }}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightGrey} />
       <AuthSteppedHeaderComponents
-        count={9}
+        count={8}
         active={activeFlowTab}
         navigatePrev={handleChangeBackNavigation}
       />
@@ -488,6 +492,11 @@ const Register = ({ navigation }) => {
                 <RegisterCompanyDetailsForm value={{ name: "" }} />
               </View>
             )}
+            {activeFlowTab === 6 && (
+              <RegisterContactInfoForm value={{ name: "" }} />
+            )}
+            {activeFlowTab === 7 && <RegisterDocumentForm />}
+            {activeFlowTab === 8 && <RegisterBankDetailsForm value={""} />}
           </View>
         </View>
         <View
@@ -504,7 +513,7 @@ const Register = ({ navigation }) => {
               <Text
                 style={{ fontSize: 14, fontWeight: "700", color: COLORS.white }}
               >
-                Next
+                {activeFlowTab === 8 ? "Submit and create account" : " Next"}
               </Text>
             </TouchableOpacity>
           </View>

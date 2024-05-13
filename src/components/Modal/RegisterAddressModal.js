@@ -1,8 +1,9 @@
 import React from "react";
-import { View, Modal, Text, TouchableOpacity } from "react-native";
+import { View, Modal, Text, TouchableOpacity, StyleSheet } from "react-native";
 import { COLORS } from "../../constants";
 
 import { Ionicons } from "@expo/vector-icons";
+import CurvyTextInputComponents from "../Input/CurvyTextInputComponents";
 const RegisterAddressModal = ({ isOpen, closeModal }) => {
   return (
     <Modal visible={isOpen} animationType="fade" statusbarTranslucent>
@@ -26,10 +27,20 @@ const RegisterAddressModal = ({ isOpen, closeModal }) => {
             </View>
           </View>
         </View>
-        <View style={{ backgroundColor: COLORS.white }}></View>
+        <View style={{ backgroundColor: COLORS.white }}>
+          <View style={styles.section}>
+            <CurvyTextInputComponents style={{ marginTop: 20 }} />
+          </View>
+        </View>
       </View>
     </Modal>
   );
 };
+const styles = StyleSheet.create({
+  section: {
+    paddingLeft: 20,
+    paddingRight: 20,
+  },
+});
 
 export default RegisterAddressModal;

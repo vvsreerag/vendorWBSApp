@@ -29,7 +29,10 @@ const LandingPage = () => {
       </View>
       <View style={styles.landingFooter}>
         <View style={styles.section}>
-          <TouchableOpacity style={styles.mainButton}>
+          <TouchableOpacity
+            style={styles.mainButton}
+            onPress={() => navigation.navigate(ROUTES.LOGIN)}
+          >
             <Text style={styles.whiteText}>Login</Text>
           </TouchableOpacity>
           <TouchableOpacity

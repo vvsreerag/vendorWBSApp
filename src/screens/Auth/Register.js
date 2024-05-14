@@ -21,13 +21,27 @@ import RegisterDocumentForm from "../../components/Forms/Register/RegisterDocume
 import RegisterBankDetailsForm from "../../components/Forms/Register/RegisterBankDetailsForm";
 
 const Register = ({ navigation }) => {
-  const [activeFlowTab, setActiveFlowTab] = useState(1);
+  const [activeFlowTab, setActiveFlowTab] = useState(8);
   const [state, setState] = useState({
     companyEmail: "",
     companyPhone: "",
     otp: "",
     password: "",
+    companyName: "",
+    registeredAddress: "",
+    tradingBusinessName: "",
+    tradingBusinessAddress: "",
+    legalEntityType: "",
+    contactEmployeeName: "",
+    contactDesignation: "",
+    contactEmail: "",
+    contactPhone: "",
+    bankName: "",
+    bankPayeeName: "",
+    bankAccountNumber: "",
+    bankSortCode: "",
   });
+
   const [error, setError] = useState({
     companyEmail: "",
     companyPhone: "",
@@ -39,6 +53,19 @@ const Register = ({ navigation }) => {
       criteria_4: "",
       nullError: "",
     },
+    companyName: "",
+    registeredAddress: "",
+    tradingBusinessName: "",
+    tradingBusinessAddress: "",
+    legalEntityType: "",
+    contactEmployeeName: "",
+    contactDesignation: "",
+    contactEmail: "",
+    contactPhone: "",
+    bankName: "",
+    bankPayeeName: "",
+    bankAccountNumber: "",
+    bankSortCode: "",
   });
 
   const handleNextButtonClick = () => {
@@ -120,8 +147,147 @@ const Register = ({ navigation }) => {
           password: { nullError: "Create new Password" },
         }));
       }
-    } else {
+    } else if (activeFlowTab === 5) {
+      const fieldsToCheck = [
+        { fieldName: "companyName", errorMessage: "Company field is required" },
+        {
+          fieldName: "registeredAddress",
+          errorMessage: "Registered Address field is required",
+        },
+        {
+          fieldName: "tradingBusinessName",
+          errorMessage: "Trading Business Name field is required",
+        },
+        {
+          fieldName: "tradingBusinessAddress",
+          errorMessage: "Trading Business Address field is required",
+        },
+        {
+          fieldName: "legalEntityType",
+          errorMessage: "Legal Entity Type field is required",
+        },
+      ];
+
+      let allFieldsFilled = true;
+
+      fieldsToCheck.forEach(({ fieldName, errorMessage }) => {
+        if (!state[fieldName]) {
+          setError((prevError) => ({
+            ...prevError,
+            [fieldName]: errorMessage,
+          }));
+          allFieldsFilled = false;
+        } else {
+          setError((prevError) => ({
+            ...prevError,
+            [fieldName]: "",
+          }));
+        }
+      });
+
+      if (allFieldsFilled) {
+        setActiveFlowTab((active) => active + 1);
+      }
+    } else if (activeFlowTab === 6) {
+      const fieldsToCheck = [
+        {
+          fieldName: "contactEmployeeName",
+          errorMessage: "Employee Name field is required",
+        },
+        {
+          fieldName: "contactDesignation",
+          errorMessage: "Designation field is required",
+        },
+
+        {
+          fieldName: "contactEmail",
+          errorMessage: "Email field is required",
+        },
+        {
+          fieldName: "contactPhone",
+          errorMessage: "Mobile number field is required",
+        },
+      ];
+
+      let allFieldsFilled = true;
+
+      fieldsToCheck.forEach(({ fieldName, errorMessage }) => {
+        if (!state[fieldName]) {
+          setError((prevError) => ({
+            ...prevError,
+            [fieldName]: errorMessage,
+          }));
+          allFieldsFilled = false;
+        } else {
+          setError((prevError) => ({
+            ...prevError,
+            [fieldName]: "",
+          }));
+        }
+      });
+      const emailRegex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w\w+)+$/;
+      if (state.contactEmail) {
+        if (!emailRegex.test(state.contactEmail)) {
+          setError((prevError) => ({
+            ...prevError,
+            ["contactEmail"]: "Enter a valid email",
+          }));
+          allFieldsFilled = false;
+        }
+      }
+      const phoneRegex = /^\d{10}$/;
+      if (state.contactPhone) {
+        if (!phoneRegex.test(state.contactPhone)) {
+          setError((prevError) => ({
+            ...prevError,
+            ["contactPhone"]: "Enter a valid phone number",
+          }));
+          allFieldsFilled = false;
+        }
+      }
+
+      if (allFieldsFilled) {
+        setActiveFlowTab((active) => active + 1);
+      }
+    } else if (activeFlowTab === 7) {
       setActiveFlowTab((active) => active + 1);
+    } else if (activeFlowTab === 8) {
+      const fieldsToCheck = [
+        { fieldName: "bankName", errorMessage: "Bank Name field is required" },
+        {
+          fieldName: "bankPayeeName",
+          errorMessage: "Payee Name field is required",
+        },
+        {
+          fieldName: "bankAccountNumber",
+          errorMessage: "Account Number field is required",
+        },
+        {
+          fieldName: "bankSortCode",
+          errorMessage: "Sort code field is required",
+        },
+      ];
+
+      let allFieldsFilled = true;
+
+      fieldsToCheck.forEach(({ fieldName, errorMessage }) => {
+        if (!state[fieldName]) {
+          setError((prevError) => ({
+            ...prevError,
+            [fieldName]: errorMessage,
+          }));
+          allFieldsFilled = false;
+        } else {
+          setError((prevError) => ({
+            ...prevError,
+            [fieldName]: "",
+          }));
+        }
+      });
+
+      if (allFieldsFilled) {
+        setActiveFlowTab((active) => active + 1);
+      }
     }
   };
   const handleChangeBackNavigation = () => {
@@ -143,16 +309,11 @@ const Register = ({ navigation }) => {
       ...prevState,
       [fieldName]: value,
     }));
-    if (fieldName === "companyEmail") {
-      setError({ companyEmail: "" });
-    }
-    if (fieldName === "companyPhone") {
-      setError({ companyPhone: "" });
-    }
+    setError((prevError) => ({
+      ...prevError,
+      [fieldName]: "",
+    }));
 
-    if (fieldName === "otp") {
-      setError({ otp: "" });
-    }
     if (fieldName === "password") {
       const atLeast8LetterRegex = /^.{8,}$/;
       const bothLowerAndUpperCaseRegex = /^(?=.*[a-z])(?=.*[A-Z])/;
@@ -489,14 +650,28 @@ const Register = ({ navigation }) => {
             )}
             {activeFlowTab === 5 && (
               <View>
-                <RegisterCompanyDetailsForm value={{ name: "" }} />
+                <RegisterCompanyDetailsForm
+                  value={state}
+                  onChangeText={handleChange}
+                  errorInput={error}
+                />
               </View>
             )}
             {activeFlowTab === 6 && (
-              <RegisterContactInfoForm value={{ name: "" }} />
+              <RegisterContactInfoForm
+                value={state}
+                onChangeText={handleChange}
+                errorInput={error}
+              />
             )}
             {activeFlowTab === 7 && <RegisterDocumentForm />}
-            {activeFlowTab === 8 && <RegisterBankDetailsForm value={""} />}
+            {activeFlowTab === 8 && (
+              <RegisterBankDetailsForm
+                value={state}
+                onChangeText={handleChange}
+                errorInput={error}
+              />
+            )}
           </View>
         </View>
         <View

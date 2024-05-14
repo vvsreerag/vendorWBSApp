@@ -2,21 +2,9 @@ import React, { useState } from "react";
 import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import OutlinedTextInput from "../../Input/OutlinedTextInputComponents";
 import { COLORS, ROUTES } from "../../../constants";
+import { Ionicons } from "@expo/vector-icons";
 
 const RegisterContactInfoForm = ({ value, onChangeText, errorInput }) => {
-  const [state, setState] = useState({
-    employeeName: value.employeeName || "",
-    designation: value.designation || "",
-    email: value.email || "",
-    phone: value.phone || "",
-  });
-
-  const onChangeTextHandle = (fieldName) => (value) => {
-    setState((prevState) => ({
-      ...prevState,
-      [fieldName]: value,
-    }));
-  };
   return (
     <View style={{ marginTop: 20 }}>
       <Text style={{ fontSize: 16, fontWeight: "700" }}>
@@ -38,28 +26,103 @@ const RegisterContactInfoForm = ({ value, onChangeText, errorInput }) => {
       <ScrollView>
         <OutlinedTextInput
           label={"Employee Name"}
-          value={state.employeeName}
-          onChangeText={(value) => onChangeTextHandle("employeeName")(value)}
-          errorInput={errorInput}
+          value={value.contactEmployeeName}
+          onChangeText={(value) => onChangeText("contactEmployeeName")(value)}
+          errorInput={errorInput.contactEmployeeName}
         />
+        {errorInput?.contactEmployeeName && (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Ionicons
+              name="alert-circle-outline"
+              size={16}
+              color={COLORS.red}
+              style={{ marginRight: 5 }}
+            />
+            <Text style={{ fontSize: 12, color: COLORS.red }}>
+              {errorInput.contactEmployeeName}
+            </Text>
+          </View>
+        )}
         <OutlinedTextInput
           label={"Designation"}
-          value={state.designation}
-          onChangeText={(value) => onChangeTextHandle("designation")(value)}
-          errorInput={errorInput}
+          value={value.contactDesignation}
+          onChangeText={(value) => onChangeText("contactDesignation")(value)}
+          errorInput={errorInput.contactDesignation}
         />
+        {errorInput?.contactDesignation && (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Ionicons
+              name="alert-circle-outline"
+              size={16}
+              color={COLORS.red}
+              style={{ marginRight: 5 }}
+            />
+            <Text style={{ fontSize: 12, color: COLORS.red }}>
+              {errorInput.contactDesignation}
+            </Text>
+          </View>
+        )}
         <OutlinedTextInput
           label={"Email Id"}
-          value={state.designation}
-          onChangeText={(value) => onChangeTextHandle("email")(value)}
-          errorInput={errorInput}
+          value={value.contactEmail}
+          onChangeText={(value) => onChangeText("contactEmail")(value)}
+          errorInput={errorInput.contactEmail}
         />
+        {errorInput?.contactEmail && (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Ionicons
+              name="alert-circle-outline"
+              size={16}
+              color={COLORS.red}
+              style={{ marginRight: 5 }}
+            />
+            <Text style={{ fontSize: 12, color: COLORS.red }}>
+              {errorInput.contactEmail}
+            </Text>
+          </View>
+        )}
         <OutlinedTextInput
           label={"Mobile number"}
-          value={state.designation}
-          onChangeText={(value) => onChangeTextHandle("phone")(value)}
-          errorInput={errorInput}
+          value={value.contactPhone}
+          phone
+          numericOnly
+          maxLength={10}
+          onChangeText={(value) => onChangeText("contactPhone")(value)}
+          errorInput={errorInput.contactPhone}
         />
+        {errorInput?.contactPhone && (
+          <View
+            style={{
+              flexDirection: "row",
+              alignItems: "center",
+            }}
+          >
+            <Ionicons
+              name="alert-circle-outline"
+              size={16}
+              color={COLORS.red}
+              style={{ marginRight: 5 }}
+            />
+            <Text style={{ fontSize: 12, color: COLORS.red }}>
+              {errorInput.contactPhone}
+            </Text>
+          </View>
+        )}
       </ScrollView>
     </View>
   );

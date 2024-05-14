@@ -3,27 +3,10 @@ import { View, Text, ScrollView, TouchableOpacity } from "react-native";
 import OutlinedTextInput from "../../Input/OutlinedTextInputComponents";
 import { COLORS, ROUTES } from "../../../constants";
 import RegisterAddressModal from "../../Modal/RegisterAddressModal";
+import { Ionicons } from "@expo/vector-icons";
 
 const RegisterCompanyDetailsForm = ({ value, onChangeText, errorInput }) => {
-  const [state, setState] = useState({
-    companyName: value?.companyName || "",
-    registeredAddress: value.registeredAddress || "",
-    tradingBusinessName: value.tradingBusinessName || "",
-    tradingBusinessAddress: value.tradingBusinessAddress || "",
-    legalEntityType: value.legalEntityType || "",
-  });
   const [addressByPostCodeModal, setAddressByPostCodeModal] = useState(false);
-
-  //   const handleAaddressByPostCodeModal = () => {
-
-  //   }
-
-  const onChangeTextHandle = (fieldName) => (value) => {
-    setState((prevState) => ({
-      ...prevState,
-      [fieldName]: value,
-    }));
-  };
   return (
     <>
       {addressByPostCodeModal && (
@@ -41,22 +24,56 @@ const RegisterCompanyDetailsForm = ({ value, onChangeText, errorInput }) => {
         <ScrollView>
           <OutlinedTextInput
             label={"Company Name"}
-            value={state.companyName}
-            onChangeText={(value) => onChangeTextHandle("companyName")(value)}
-            errorInput={errorInput}
+            value={value.companyName}
+            onChangeText={(value) => onChangeText("companyName")(value)}
+            errorInput={errorInput?.companyName}
           />
+          {errorInput?.companyName && (
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Ionicons
+                name="alert-circle-outline"
+                size={16}
+                color={COLORS.red}
+                style={{ marginRight: 5 }}
+              />
+              <Text style={{ fontSize: 12, color: COLORS.red }}>
+                {errorInput.companyName}
+              </Text>
+            </View>
+          )}
           <TouchableOpacity onPress={() => setAddressByPostCodeModal(true)}>
             <OutlinedTextInput
               label={"Registered Address"}
-              value={state.registeredAddress}
+              value={value.registeredAddress}
               buttonType
-              onChangeText={(value) =>
-                onChangeTextHandle("registeredAddress")(value)
-              }
-              errorInput={errorInput}
+              onChangeText={(value) => onChangeText("registeredAddress")(value)}
+              errorInput={errorInput.registeredAddress}
             />
           </TouchableOpacity>
 
+          {errorInput?.registeredAddress && (
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Ionicons
+                name="alert-circle-outline"
+                size={16}
+                color={COLORS.red}
+                style={{ marginRight: 5 }}
+              />
+              <Text style={{ fontSize: 12, color: COLORS.red }}>
+                {errorInput.registeredAddress}
+              </Text>
+            </View>
+          )}
           <View
             style={{
               paddingTop: 10,
@@ -72,29 +89,79 @@ const RegisterCompanyDetailsForm = ({ value, onChangeText, errorInput }) => {
           </View>
           <OutlinedTextInput
             label={"Trading Business Name"}
-            value={state.tradingBusinessName}
-            onChangeText={(value) =>
-              onChangeTextHandle("tradingBusinessName")(value)
-            }
-            errorInput={errorInput}
+            value={value.tradingBusinessName}
+            onChangeText={(value) => onChangeText("tradingBusinessName")(value)}
+            errorInput={errorInput.tradingBusinessName}
           />
+          {errorInput?.tradingBusinessName && (
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Ionicons
+                name="alert-circle-outline"
+                size={16}
+                color={COLORS.red}
+                style={{ marginRight: 5 }}
+              />
+              <Text style={{ fontSize: 12, color: COLORS.red }}>
+                {errorInput.tradingBusinessName}
+              </Text>
+            </View>
+          )}
 
           <OutlinedTextInput
             label={"Trading Business Address"}
-            value={state.tradingBusinessAddress}
+            value={value.tradingBusinessAddress}
             onChangeText={(value) =>
-              onChangeTextHandle("tradingBusinessAddress")(value)
+              onChangeText("tradingBusinessAddress")(value)
             }
-            errorInput={errorInput}
+            errorInput={errorInput.tradingBusinessAddress}
           />
+          {errorInput?.tradingBusinessAddress && (
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Ionicons
+                name="alert-circle-outline"
+                size={16}
+                color={COLORS.red}
+                style={{ marginRight: 5 }}
+              />
+              <Text style={{ fontSize: 12, color: COLORS.red }}>
+                {errorInput.tradingBusinessAddress}
+              </Text>
+            </View>
+          )}
           <OutlinedTextInput
             label={"Legal Entity Type"}
-            value={state.legalEntityType}
-            onChangeText={(value) =>
-              onChangeTextHandle("legalEntityType")(value)
-            }
-            errorInput={errorInput}
+            value={value.legalEntityType}
+            onChangeText={(value) => onChangeText("legalEntityType")(value)}
+            errorInput={errorInput.legalEntityType}
           />
+          {errorInput?.legalEntityType && (
+            <View
+              style={{
+                flexDirection: "row",
+                alignItems: "center",
+              }}
+            >
+              <Ionicons
+                name="alert-circle-outline"
+                size={16}
+                color={COLORS.red}
+                style={{ marginRight: 5 }}
+              />
+              <Text style={{ fontSize: 12, color: COLORS.red }}>
+                {errorInput.legalEntityType}
+              </Text>
+            </View>
+          )}
         </ScrollView>
       </View>
     </>

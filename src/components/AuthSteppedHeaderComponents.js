@@ -39,30 +39,32 @@ const AuthSteppedHeaderComponents = ({ count, active, navigatePrev }) => {
           )}
         </View>
       </View>
-      <View style={{ paddingTop: 2, paddingBottom: 2 }}>
-        <View style={{ flexDirection: "row" }}>
-          <View style={{ flex: completedBar, marginRight: 2 }}>
-            <View
-              style={{
-                backgroundColor: COLORS.green,
-                height: 4,
-                borderRadius: 10,
-                width: "100%",
-              }}
-            />
-          </View>
-          <View style={{ flex: remainingBar }}>
-            <View
-              style={{
-                backgroundColor: COLORS.lightGreen,
-                height: 4,
-                borderRadius: 10,
-                width: "100%",
-              }}
-            />
+      {count > 1 && (
+        <View style={{ paddingTop: 2, paddingBottom: 2 }}>
+          <View style={{ flexDirection: "row" }}>
+            <View style={{ flex: completedBar, marginRight: 2 }}>
+              <View
+                style={{
+                  backgroundColor: COLORS.green,
+                  height: 4,
+                  borderRadius: 10,
+                  width: "100%",
+                }}
+              />
+            </View>
+            <View style={{ flex: remainingBar }}>
+              <View
+                style={{
+                  backgroundColor: COLORS.lightGreen,
+                  height: 4,
+                  borderRadius: 10,
+                  width: "100%",
+                }}
+              />
+            </View>
           </View>
         </View>
-      </View>
+      )}
     </View>
   );
 };

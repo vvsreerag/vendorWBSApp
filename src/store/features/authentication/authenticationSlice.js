@@ -12,13 +12,10 @@ const initialState = {
   error: null,
 };
 
-export const login = createAsyncThunk(
-  "authentication/vendorLogin",
-  async (data) => {
-    const response = data;
-    return response;
-  }
-);
+export const login = createAsyncThunk("authentication/login", async (data) => {
+  const response = data;
+  return response;
+});
 
 export const authenticationSlice = createSlice({
   name: "authentication",

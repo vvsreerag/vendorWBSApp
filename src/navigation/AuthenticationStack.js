@@ -5,6 +5,8 @@ import { ROUTES } from "../constants";
 import LandingPage from "../screens/Auth/LandingPage";
 import Register from "../screens/Auth/Register";
 import AuthSteppedHeaderComponents from "../components/AuthSteppedHeaderComponents";
+import Login from "../screens/Auth/Login";
+import ForgotPassword from "../screens/Auth/ForgotPassword";
 
 const Stack = createNativeStackNavigator();
 
@@ -32,6 +34,30 @@ const AuthenticationStack = () => {
         <Stack.Screen
           name={ROUTES.REGISTER}
           component={Register}
+          options={{
+            header: (props) => (
+              <AuthSteppedHeaderComponents
+                {...props}
+                navigation={props.navigation}
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name={ROUTES.LOGIN}
+          component={Login}
+          options={{
+            header: (props) => (
+              <AuthSteppedHeaderComponents
+                {...props}
+                navigation={props.navigation}
+              />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name={ROUTES.FORGOT_PASSWORD}
+          component={ForgotPassword}
           options={{
             header: (props) => (
               <AuthSteppedHeaderComponents

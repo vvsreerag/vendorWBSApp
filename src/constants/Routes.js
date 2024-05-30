@@ -8,4 +8,5 @@ export const ROUTES = {
   DASHBOARD: "Dashboard",
   EARNING: "Earning",
   PROFILE: "Profile",
+  TRANSACTION_HISTORY: "Transaction History",
 };

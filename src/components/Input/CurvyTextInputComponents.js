@@ -2,7 +2,7 @@ import React from "react";
 import { Text, TextInput, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../../constants";
 import { Ionicons } from "@expo/vector-icons";
-const CurvyTextInputComponents = ({ style, searchInput }) => {
+const CurvyTextInputComponents = ({ style, searchInput, placeholder }) => {
   return (
     <View
       style={{
@@ -11,13 +11,14 @@ const CurvyTextInputComponents = ({ style, searchInput }) => {
         borderRadius: 50,
         paddingLeft: 15,
         paddingRight: 15,
-        paddingTop: 5,
-        paddingBottom: 5,
+        paddingTop: 6,
+        paddingBottom: 6,
       }}
     >
       <View style={{ flexDirection: "row", alignItems: "center" }}>
         <View style={{ flex: 0.9 }}>
           <TextInput
+            placeholder={placeholder}
             style={{
               backgroundColor: COLORS.lightGrey,
               fontSize: 14,
@@ -25,9 +26,9 @@ const CurvyTextInputComponents = ({ style, searchInput }) => {
             }}
           />
         </View>
-        <View style={{ flex: 0.1 }}>
+        <View style={{ flex: 0.1, alignItems: "flex-end", marginRight: 10 }}>
           <TouchableOpacity>
-            <Ionicons name="search" size={24} color="black" />
+            <Ionicons name="search" size={20} color={COLORS.darkGrey} />
           </TouchableOpacity>
         </View>
       </View>

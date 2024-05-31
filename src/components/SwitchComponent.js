@@ -1,11 +1,5 @@
 import React, { useEffect, useState } from "react";
-import {
-  Pressable,
-  View,
-  Animated,
-  SafeAreaView,
-  StyleSheet,
-} from "react-native";
+import { Pressable, View, Animated, StyleSheet } from "react-native";
 import { COLORS } from "../constants";
 
 const SwitchComponent = (props) => {
@@ -13,28 +7,38 @@ const SwitchComponent = (props) => {
   const [animatedValue] = useState(new Animated.Value(value ? 1 : 0));
 
   useEffect(() => {
-    // Update the animated value when the value prop changes
     Animated.timing(animatedValue, {
       toValue: value ? 1 : 0,
-      duration: 200, // Adjust the animation duration
+      duration: 200,
       useNativeDriver: false,
     }).start();
   }, [value]);
 
   const translateX = animatedValue.interpolate({
     inputRange: [0, 1],
-    outputRange: [2, 21], // Adjust the distance of the switch head
+    outputRange: [2, 21],
+  });
+
+  const backgroundColor = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [COLORS.darkGrey, COLORS.green],
+  });
+
+  const borderColor = animatedValue.interpolate({
+    inputRange: [0, 1],
+    outputRange: [COLORS.darkGrey, COLORS.green],
   });
 
   const toggleSwitch = () => {
-    const newValue = !value;
-    onValueChange(newValue);
+    onValueChange(!value);
   };
 
   return (
     <View>
       <Pressable onPress={toggleSwitch} style={styles.pressable}>
-        <View style={styles.container}>
+        <Animated.View
+          style={[styles.container, { backgroundColor, borderColor }]}
+        >
           <View style={styles.innerContainer}>
             <Animated.View
               style={{
@@ -44,7 +48,7 @@ const SwitchComponent = (props) => {
               <View style={styles.thumb} />
             </Animated.View>
           </View>
-        </View>
+        </Animated.View>
       </Pressable>
     </View>
   );
@@ -58,7 +62,6 @@ const styles = StyleSheet.create({
   },
   container: {
     borderRadius: 15,
-    borderColor: COLORS.darkGrey,
     borderWidth: 2,
     flex: 1,
   },
@@ -69,10 +72,10 @@ const styles = StyleSheet.create({
     position: "relative",
   },
   thumb: {
-    backgroundColor: COLORS.darkGrey,
     width: 20,
     height: 20,
     borderRadius: 100,
+    backgroundColor: COLORS.white,
   },
 });
 

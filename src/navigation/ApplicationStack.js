@@ -4,6 +4,8 @@ import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { ROUTES } from "../constants";
 import TabNavigationStack from "./TabNavigationStack";
 import TransactionHistory from "../screens/Home/TransactionHistory";
+import VendorDetails from "../screens/Home/VendorDetails";
+import AboutUs from "../screens/Home/AboutUs";
 
 const Stack = createNativeStackNavigator();
 
@@ -33,6 +35,11 @@ const ApplicationStack = () => {
             name={ROUTES.TRANSACTION_HISTORY}
             component={TransactionHistory}
           />
+          <Stack.Screen
+            name={ROUTES.VENDOR_DETAILS}
+            component={VendorDetails}
+          />
+          <Stack.Screen name={ROUTES.ABOUT_US} component={AboutUs} />
         </Stack.Navigator>
       </SafeAreaView>
     </>

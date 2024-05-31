@@ -4,7 +4,7 @@ import { COLORS } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-const SubHeaderComponents = () => {
+const SubHeaderComponents = ({ download }) => {
   const navigation = useNavigation();
   return (
     <View>
@@ -27,13 +27,16 @@ const SubHeaderComponents = () => {
                 color={COLORS.grey}
               />
             </TouchableOpacity>
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <MaterialIcons
-                name="file-download"
-                size={24}
-                color={COLORS.grey}
-              />
-            </TouchableOpacity>
+
+            {download && (
+              <TouchableOpacity onPress={() => navigation.goBack()}>
+                <MaterialIcons
+                  name="file-download"
+                  size={24}
+                  color={COLORS.grey}
+                />
+              </TouchableOpacity>
+            )}
           </View>
         </View>
       </View>

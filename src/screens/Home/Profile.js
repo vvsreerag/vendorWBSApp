@@ -26,7 +26,11 @@ const Profile = () => {
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>ACCOUNT DETAILS</Text>
           <MenuItemGroup style={styles.menuGroup}>
-            <MenuItem name="Vendor Details" icon="insert-emoticon" />
+            <MenuItem
+              name="Vendor Details"
+              icon="insert-emoticon"
+              route={() => navigation.navigate(ROUTES.VENDOR_DETAILS)}
+            />
             <MenuItem name="Order History" icon="receipt-long" />
             <MenuItem
               name="Transaction History"
@@ -41,7 +45,11 @@ const Profile = () => {
             <MenuItem name="Support & FAQ" icon="help-outline" />
             <MenuItem name="Terms & Conditions" icon="assignment-add" />
             <MenuItem name="Privacy Policy" icon="privacy-tip" />
-            <MenuItem name="About Us" icon="info-outline" />
+            <MenuItem
+              name="About Us"
+              icon="info-outline"
+              route={() => navigation.navigate(ROUTES.ABOUT_US)}
+            />
           </MenuItemGroup>
         </View>
         <View style={styles.section}>

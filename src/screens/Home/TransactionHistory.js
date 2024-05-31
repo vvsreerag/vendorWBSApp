@@ -78,7 +78,7 @@ const TransactionHistory = () => {
         isOpenModal={filterByDateModal}
         closeModal={() => handleDateFilterPress()}
       />
-      <SubHeaderComponents />
+      <SubHeaderComponents download />
       <View style={styles.contentContainer}>
         <Text style={styles.headerText}>Transaction History</Text>
         <CurvyTextInputComponents

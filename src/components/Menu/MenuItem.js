@@ -5,6 +5,19 @@ import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
 const MenuItem = ({ name, icon, route, dropDescription }) => {
   const [isDropOpen, setIsDropOpen] = useState(false);
+
+  const renderDropDescription = () => {
+    if (!dropDescription) return null;
+
+    // Split the description by newline characters to create separate lines
+    const lines = dropDescription.split("\n");
+    return lines.map((line, index) => (
+      <Text key={index} style={styles.dropDescriptionText}>
+        {line.trim()}
+      </Text>
+    ));
+  };
+
   return (
     <View style={styles.card}>
       <TouchableOpacity
@@ -34,29 +47,40 @@ const MenuItem = ({ name, icon, route, dropDescription }) => {
         </View>
       </TouchableOpacity>
       {dropDescription && isDropOpen && (
-        <View style={{ paddingHorizontal: 20, paddingVertical: 20 }}>
-          <Text>{dropDescription || "Description"}</Text>
+        <View style={styles.dropDescriptionContainer}>
+          {renderDropDescription()}
         </View>
       )}
     </View>
   );
 };
-const styles = StyleSheet.create({
-  card: {},
 
-  statsCard: {
-    width: "100%",
+const styles = StyleSheet.create({
+  card: {
+    marginVertical: 5,
+    overflow: "hidden",
   },
   statsCardRow: {
     padding: 10,
     flexDirection: "row",
     alignItems: "center",
-    paddingVertical: 13,
+    backgroundColor: COLORS.white,
   },
   earningsValue: {
     fontSize: 15,
     color: COLORS.darkGrey,
     fontWeight: "600",
   },
+  dropDescriptionContainer: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: COLORS.lightGrey,
+  },
+  dropDescriptionText: {
+    fontSize: 14,
+    color: COLORS.darkGrey,
+    marginBottom: 5,
+  },
 });
+
 export default MenuItem;

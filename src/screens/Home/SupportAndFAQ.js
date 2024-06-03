@@ -36,12 +36,17 @@ const SupportAndFAQ = () => {
             icon="insert-emoticon"
             title="Account"
             backgroundColor="#FEF9C3"
-            route={() => navigation.navigate(ROUTES.FAQ_DETAILS)}
+            route={() =>
+              navigation.navigate(ROUTES.FAQ_DETAILS, { paramName: "Account" })
+            }
           />
           <SupportItem
             icon="payments"
             title="Payments"
             backgroundColor="#C8E6C9"
+            route={() =>
+              navigation.navigate(ROUTES.FAQ_DETAILS, { paramName: "Payments" })
+            }
           />
         </View>
         <View style={styles.supportItemsContainer}>
@@ -49,11 +54,17 @@ const SupportAndFAQ = () => {
             icon="receipt-long"
             title="Requests"
             backgroundColor="#E1D9FF"
+            route={() =>
+              navigation.navigate(ROUTES.FAQ_DETAILS, { paramName: "Requests" })
+            }
           />
           <SupportItem
             icon="star-border"
             title="Others"
             backgroundColor="#E8CCD6"
+            route={() =>
+              navigation.navigate(ROUTES.FAQ_DETAILS, { paramName: "Others" })
+            }
           />
         </View>
         <View style={styles.section}>

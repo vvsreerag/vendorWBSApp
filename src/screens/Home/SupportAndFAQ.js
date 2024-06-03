@@ -1,116 +1,77 @@
 import React from "react";
-import { StyleSheet, Text, View } from "react-native";
+import {
+  ScrollView,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  View,
+} from "react-native";
 import SubHeaderComponents from "../../components/SubHeaderComponents";
 import { COLORS } from "../../constants";
 import { MaterialIcons } from "@expo/vector-icons";
+import MenuItemGroup from "../../components/Menu/MenuItemGroup";
+import MenuItem from "../../components/Menu/MenuItem";
+
+// Component for each support item
+const SupportItem = ({ icon, title, backgroundColor }) => (
+  <TouchableOpacity style={[styles.supportItem, { backgroundColor }]}>
+    <MaterialIcons name={icon} size={20} color={COLORS.black} />
+    <Text style={styles.supportItemText}>{title}</Text>
+  </TouchableOpacity>
+);
 
 const SupportAndFAQ = () => {
   return (
     <View style={styles.container}>
       <SubHeaderComponents />
       <View style={styles.contentContainer}>
-        <Text style={{ fontSize: 14, fontWeight: "700", color: COLORS.black }}>
-          Support & FAQ
-        </Text>
-        <View style={{ flexDirection: "row", gap: 10, marginTop: 20 }}>
-          <View
-            style={{
-              backgroundColor: "#FEF9C3",
-              padding: 10,
-              borderRadius: 10,
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <MaterialIcons
-              name="insert-emoticon"
-              size={20}
-              color={COLORS.black}
-            />
-            <Text
-              style={{
-                fontSize: 14,
-                fontWeight: "700",
-                color: COLORS.black,
-                marginLeft: 10,
-              }}
-            >
-              Account
-            </Text>
-          </View>
-          <View
-            style={{
-              backgroundColor: "#C8E6C9",
-              padding: 10,
-              borderRadius: 10,
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <MaterialIcons name="payments" size={20} color={COLORS.black} />
-            <Text
-              style={{
-                fontSize: 14,
-                fontWeight: "700",
-                color: COLORS.black,
-                marginLeft: 10,
-              }}
-            >
-              Payments
-            </Text>
-          </View>
+        <Text style={styles.header}>Support & FAQ</Text>
+        <View style={styles.supportItemsContainer}>
+          <SupportItem
+            icon="insert-emoticon"
+            title="Account"
+            backgroundColor="#FEF9C3"
+          />
+          <SupportItem
+            icon="payments"
+            title="Payments"
+            backgroundColor="#C8E6C9"
+          />
         </View>
-        <View style={{ flexDirection: "row", gap: 10, marginTop: 10 }}>
-          <View
-            style={{
-              backgroundColor: "#FEF9C3",
-              paddingVertical: 15,
-              borderRadius: 10,
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <MaterialIcons
-              name="insert-emoticon"
-              size={20}
-              color={COLORS.black}
-            />
-            <Text
-              style={{
-                fontSize: 14,
-                fontWeight: "700",
-                color: COLORS.black,
-                marginLeft: 10,
-              }}
-            >
-              Account
-            </Text>
-          </View>
-          <View
-            style={{
-              backgroundColor: "#C8E6C9",
-              padding: 10,
-              borderRadius: 10,
-              flex: 1,
-              flexDirection: "row",
-              justifyContent: "center",
-            }}
-          >
-            <MaterialIcons name="payments" size={20} color={COLORS.black} />
-            <Text
-              style={{
-                fontSize: 14,
-                fontWeight: "700",
-                color: COLORS.black,
-                marginLeft: 10,
-              }}
-            >
-              Payments
-            </Text>
-          </View>
+        <View style={styles.supportItemsContainer}>
+          <SupportItem
+            icon="receipt-long"
+            title="Requests"
+            backgroundColor="#E1D9FF"
+          />
+          <SupportItem
+            icon="star-border"
+            title="Others"
+            backgroundColor="#E8CCD6"
+          />
+        </View>
+        <View style={styles.section}>
+          <Text style={styles.headerLabel}>FREQUENTLY ASKED QUESTIONS</Text>
+          <ScrollView>
+            <MenuItemGroup style={styles.menuGroup}>
+              <MenuItem
+                name="Why am I not receiving the OTP?"
+                dropDescription={"hi how are you"}
+              />
+              <MenuItem
+                name="Why am I unable to log in to my account?"
+                dropDescription={"hi how are you"}
+              />
+              <MenuItem
+                name="How do I reset my password?"
+                dropDescription={"hi how are you"}
+              />
+              <MenuItem
+                name="How do I update my contact details?"
+                dropDescription={"hi how are you"}
+              />
+            </MenuItemGroup>
+          </ScrollView>
         </View>
       </View>
     </View>
@@ -125,6 +86,41 @@ const styles = StyleSheet.create({
   contentContainer: {
     paddingHorizontal: 20,
     flex: 1,
+  },
+  section: {
+    marginTop: 20,
+  },
+  header: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: COLORS.black,
+    marginBottom: 10,
+  },
+  supportItemsContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+    marginTop: 10,
+    gap: 10,
+  },
+  supportItem: {
+    paddingVertical: 13,
+    borderRadius: 10,
+    flexDirection: "row",
+    justifyContent: "center",
+    alignItems: "center",
+    flex: 1,
+  },
+  supportItemText: {
+    fontSize: 14,
+    fontWeight: "700",
+    color: COLORS.black,
+    marginLeft: 10,
+  },
+  headerLabel: {
+    color: COLORS.grey,
+    fontSize: 12,
+    fontWeight: "500",
+    marginBottom: 5,
   },
 });
 

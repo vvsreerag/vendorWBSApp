@@ -6,6 +6,7 @@ import TabNavigationStack from "./TabNavigationStack";
 import TransactionHistory from "../screens/Home/TransactionHistory";
 import VendorDetails from "../screens/Home/VendorDetails";
 import AboutUs from "../screens/Home/AboutUs";
+import SupportAndFAQ from "../screens/Home/SupportAndFAQ";
 
 const Stack = createNativeStackNavigator();
 
@@ -40,6 +41,10 @@ const ApplicationStack = () => {
             component={VendorDetails}
           />
           <Stack.Screen name={ROUTES.ABOUT_US} component={AboutUs} />
+          <Stack.Screen
+            name={ROUTES.SUPPORT_AND_FAQ}
+            component={SupportAndFAQ}
+          />
         </Stack.Navigator>
       </SafeAreaView>
     </>

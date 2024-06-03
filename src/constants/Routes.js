@@ -8,7 +8,8 @@ export const ROUTES = {
   DASHBOARD: "Dashboard",
   EARNING: "Earning",
   PROFILE: "Profile",
-  TRANSACTION_HISTORY: "Transaction History",
   VENDOR_DETAILS: "Vendor Details",
+  TRANSACTION_HISTORY: "Transaction History",
+  SUPPORT_AND_FAQ: "Support & FAQ",
   ABOUT_US: "About Us",
 };

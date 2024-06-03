@@ -42,7 +42,11 @@ const Profile = () => {
         <View style={styles.section}>
           <Text style={styles.sectionLabel}>SUPPORT</Text>
           <MenuItemGroup style={styles.menuGroup}>
-            <MenuItem name="Support & FAQ" icon="help-outline" />
+            <MenuItem
+              name="Support & FAQ"
+              icon="help-outline"
+              route={() => navigation.navigate(ROUTES.SUPPORT_AND_FAQ)}
+            />
             <MenuItem name="Terms & Conditions" icon="assignment-add" />
             <MenuItem name="Privacy Policy" icon="privacy-tip" />
             <MenuItem

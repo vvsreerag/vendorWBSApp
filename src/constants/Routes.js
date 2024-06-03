@@ -11,5 +11,6 @@ export const ROUTES = {
   VENDOR_DETAILS: "Vendor Details",
   TRANSACTION_HISTORY: "Transaction History",
   SUPPORT_AND_FAQ: "Support & FAQ",
+  FAQ_DETAILS: "FAQ Details",
   ABOUT_US: "About Us",
 };

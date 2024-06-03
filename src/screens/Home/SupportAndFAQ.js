@@ -7,20 +7,25 @@ import {
   View,
 } from "react-native";
 import SubHeaderComponents from "../../components/SubHeaderComponents";
-import { COLORS } from "../../constants";
+import { COLORS, ROUTES } from "../../constants";
 import { MaterialIcons } from "@expo/vector-icons";
 import MenuItemGroup from "../../components/Menu/MenuItemGroup";
 import MenuItem from "../../components/Menu/MenuItem";
+import { useNavigation } from "@react-navigation/native";
 
 // Component for each support item
-const SupportItem = ({ icon, title, backgroundColor }) => (
-  <TouchableOpacity style={[styles.supportItem, { backgroundColor }]}>
+const SupportItem = ({ icon, title, backgroundColor, route }) => (
+  <TouchableOpacity
+    style={[styles.supportItem, { backgroundColor }]}
+    onPress={route}
+  >
     <MaterialIcons name={icon} size={20} color={COLORS.black} />
     <Text style={styles.supportItemText}>{title}</Text>
   </TouchableOpacity>
 );
 
 const SupportAndFAQ = () => {
+  const navigation = useNavigation();
   return (
     <View style={styles.container}>
       <SubHeaderComponents />
@@ -31,6 +36,7 @@ const SupportAndFAQ = () => {
             icon="insert-emoticon"
             title="Account"
             backgroundColor="#FEF9C3"
+            route={() => navigation.navigate(ROUTES.FAQ_DETAILS)}
           />
           <SupportItem
             icon="payments"

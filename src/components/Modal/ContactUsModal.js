@@ -10,13 +10,12 @@ const ContactUsModal = ({ isOpenModal, closeModal }) => {
       icon: "call-outline",
       method: "WhatsApp",
       availability: "8:00am - 10:00pm",
-      contact: "xxxx-xxx-xxx",
+      contact: "07990493161",
     },
     {
       icon: "mail-outline",
-      method: "Email",
+      method: "Help Request",
       availability: "24 x 7 support",
-      contact: "info@winbysyndicate.com",
     },
   ];
 
@@ -36,9 +35,11 @@ const ContactUsModal = ({ isOpenModal, closeModal }) => {
                   {option.availability}
                 </Text>
               </View>
-              <View style={styles.contactTextContainer}>
-                <Text style={styles.contactText}>{option.contact}</Text>
-              </View>
+              {option?.contact && (
+                <View style={styles.contactTextContainer}>
+                  <Text style={styles.contactText}>{option.contact}</Text>
+                </View>
+              )}
             </View>
           </TouchableOpacity>
         ))}

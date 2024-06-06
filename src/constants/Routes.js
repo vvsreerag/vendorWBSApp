@@ -4,6 +4,8 @@ export const ROUTES = {
   REGISTER: "Register",
   FORGOT_PASSWORD: "Forgot Password",
 
+  HELP_REQUEST: "Help request",
+
   MAIN: "Main screen",
   DASHBOARD: "Dashboard",
   EARNING: "Earning",

@@ -7,6 +7,8 @@ import Register from "../screens/Auth/Register";
 import AuthSteppedHeaderComponents from "../components/AuthSteppedHeaderComponents";
 import Login from "../screens/Auth/Login";
 import ForgotPassword from "../screens/Auth/ForgotPassword";
+import HelpRequest from "../screens/Common/HelpRequest";
+import SubHeaderComponents from "../components/SubHeaderComponents";
 
 const Stack = createNativeStackNavigator();
 
@@ -64,6 +66,15 @@ const AuthenticationStack = () => {
                 {...props}
                 navigation={props.navigation}
               />
+            ),
+          }}
+        />
+        <Stack.Screen
+          name={ROUTES.HELP_REQUEST}
+          component={HelpRequest}
+          options={{
+            header: (props) => (
+              <SubHeaderComponents {...props} navigation={props.navigation} />
             ),
           }}
         />

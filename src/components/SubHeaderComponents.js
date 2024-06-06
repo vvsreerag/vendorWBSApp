@@ -4,7 +4,7 @@ import { COLORS } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, MaterialIcons } from "@expo/vector-icons";
 
-const SubHeaderComponents = ({ download }) => {
+const SubHeaderComponents = ({ download, discard, callBackDiscard }) => {
   const navigation = useNavigation();
   return (
     <View>
@@ -20,7 +20,11 @@ const SubHeaderComponents = ({ download }) => {
           <View
             style={{ flexDirection: "row", justifyContent: "space-between" }}
           >
-            <TouchableOpacity onPress={() => navigation.goBack()}>
+            <TouchableOpacity
+              onPress={() =>
+                discard ? callBackDiscard() : navigation.goBack()
+              }
+            >
               <Ionicons
                 name="arrow-back-outline"
                 size={24}
@@ -29,7 +33,7 @@ const SubHeaderComponents = ({ download }) => {
             </TouchableOpacity>
 
             {download && (
-              <TouchableOpacity onPress={() => navigation.goBack()}>
+              <TouchableOpacity>
                 <MaterialIcons
                   name="file-download"
                   size={24}

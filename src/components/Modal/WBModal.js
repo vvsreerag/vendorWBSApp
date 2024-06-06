@@ -75,7 +75,8 @@ const styles = StyleSheet.create({
   modal: {
     backgroundColor: COLORS.white,
 
-    borderRadius: 16,
+    borderTopLeftRadius: 16,
+    borderTopRightRadius: 16,
     padding: 20,
   },
   closeButtonContainer: {

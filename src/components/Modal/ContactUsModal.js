@@ -1,10 +1,12 @@
 import React from "react";
 import { Text, TouchableOpacity, View, StyleSheet } from "react-native";
-import { COLORS } from "../../constants";
+import { COLORS, ROUTES } from "../../constants";
 import { Ionicons } from "@expo/vector-icons";
 import WBModal from "./WBModal";
+import { useNavigation } from "@react-navigation/native";
 
 const ContactUsModal = ({ isOpenModal, closeModal }) => {
+  const navigation = useNavigation();
   const contactOptions = [
     {
       icon: "call-outline",
@@ -16,15 +18,24 @@ const ContactUsModal = ({ isOpenModal, closeModal }) => {
       icon: "mail-outline",
       method: "Help Request",
       availability: "24 x 7 support",
+      route: () => navigation.navigate(ROUTES.HELP_REQUEST),
     },
   ];
+
+  const handleContactRequest = (route) => {
+    route();
+    closeModal();
+  };
 
   return (
     <WBModal isOpenModal={isOpenModal} closeModal={closeModal} height={25}>
       <>
         <Text style={styles.title}>How would you like us to contact you?</Text>
         {contactOptions.map((option, index) => (
-          <TouchableOpacity key={index}>
+          <TouchableOpacity
+            key={index}
+            onPress={() => handleContactRequest(option.route)}
+          >
             <View style={styles.contactOption}>
               <View style={styles.iconContainer}>
                 <Ionicons name={option.icon} size={20} color="black" />

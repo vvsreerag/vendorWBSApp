@@ -8,7 +8,7 @@ import {
   Dimensions,
   TouchableOpacity,
 } from "react-native";
-import { COLORS } from "../../constants";
+import { COLORS, ROUTES } from "../../constants";
 import MainHeaderComponents from "../../components/MainHeaderComponents";
 import RequestItem from "../../components/Menu/RequestItem";
 import CurvyTextInputComponents from "../../components/Input/CurvyTextInputComponents";
@@ -17,6 +17,7 @@ import {
   FontAwesome5,
   Ionicons,
 } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const { width } = Dimensions.get("window");
 
@@ -52,6 +53,9 @@ const Tabs = ({ tabs, activeTab, setActiveTab }) => {
 
 const Dashboard = () => {
   const [activeTab, setActiveTab] = useState(0);
+  const [isReviewRequest, setIsReviewRequest] = useState(true);
+
+  const navigation = useNavigation();
 
   const tabs = [
     { label: "To Do", count: 10 },
@@ -62,8 +66,11 @@ const Dashboard = () => {
   const items = [
     { id: 1, status: "To Do", text: "Item 1", scanned: 0, total: 60 },
     { id: 2, status: "To Do", text: "Item 2", scanned: 10, total: 50 },
-    { id: 3, status: "Print Complete", text: "Item 3", scanned: 30, total: 60 },
-    { id: 4, status: "Completed", text: "Item 4", scanned: 60, total: 60 },
+    { id: 3, status: "To Do", text: "Item 2", scanned: 10, total: 50 },
+    { id: 4, status: "To Do", text: "Item 2", scanned: 10, total: 50 },
+    { id: 5, status: "To Do", text: "Item 2", scanned: 10, total: 50 },
+    { id: 6, status: "Print Complete", text: "Item 3", scanned: 30, total: 60 },
+    { id: 7, status: "Completed", text: "Item 4", scanned: 60, total: 60 },
     // Add more items as needed
   ];
 
@@ -75,94 +82,117 @@ const Dashboard = () => {
     <View style={{ flex: 1, backgroundColor: COLORS.lightGrey }}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.white} />
       <MainHeaderComponents />
-      <View style={styles.section}>
-        <Text style={[styles.label, { paddingLeft: 20 }]}>REVIEW REQUESTS</Text>
-        <View style={{ justifyContent: "flex-start" }}>
-          <ScrollView
-            horizontal
-            showsHorizontalScrollIndicator={false}
-            pagingEnabled
-            scrollEventThrottle={16}
-            snapToInterval={width * 0.8 + 10}
-            decelerationRate="fast"
-            contentContainerStyle={styles.horizontalScrollView}
-          >
-            <RequestItem />
-            <RequestItem />
-            <RequestItem />
-          </ScrollView>
+      {isReviewRequest && (
+        <View style={styles.section}>
+          <Text style={[styles.label, { paddingLeft: 20 }]}>
+            REVIEW REQUESTS
+          </Text>
+          <View style={{ justifyContent: "flex-start", marginBottom: 20 }}>
+            <ScrollView
+              horizontal
+              showsHorizontalScrollIndicator={false}
+              pagingEnabled
+              scrollEventThrottle={16}
+              snapToInterval={width * 0.8 + 10}
+              decelerationRate="fast"
+              contentContainerStyle={styles.horizontalScrollView}
+            >
+              <RequestItem />
+              <RequestItem />
+              <RequestItem />
+            </ScrollView>
+          </View>
         </View>
-      </View>
+      )}
+
       <View style={[styles.section, styles.manageRequestsSection]}>
         <Text style={styles.label}>MANAGE REQUESTS</Text>
         <CurvyTextInputComponents placeholder="Search by Syndicate Number" />
         <View>
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
-          <ScrollView>
+          <ScrollView showsVerticalScrollIndicator={false}>
             {filteredItems.map((item) => {
               const progress = (item.scanned / item.total) * 100;
               return (
-                <View key={item.id} style={styles.itemContainer}>
+                <TouchableOpacity
+                  key={item.id}
+                  style={styles.itemContainer}
+                  onPress={() => navigation.navigate(ROUTES.REQUESTS)}
+                >
                   <View style={styles.itemContainerContent}>
-                    <MaterialCommunityIcons
-                      name="progress-clock"
-                      size={20}
-                      color={COLORS.grey}
-                    />
+                    {item.status === "Completed" ? (
+                      <MaterialCommunityIcons
+                        name="progress-check"
+                        size={20}
+                        color={COLORS.grey}
+                      />
+                    ) : (
+                      <MaterialCommunityIcons
+                        name="progress-clock"
+                        size={20}
+                        color={COLORS.grey}
+                      />
+                    )}
+
                     <View style={{ alignItems: "flex-start" }}>
                       <Text style={styles.itemTitle}>SYN123323423</Text>
                       <Text style={styles.itemDescription}>
                         Request Date 24 May 2024, 13:20
                       </Text>
                     </View>
-                    <View style={{ alignItems: "flex-end" }}>
+                    {item.status !== "Completed" && (
+                      <View style={{ alignItems: "flex-end" }}>
+                        <View
+                          style={[
+                            styles.button,
+                            { backgroundColor: COLORS.errorBackground },
+                          ]}
+                        >
+                          <Text
+                            style={{ fontSize: 14, color: COLORS.errorText }}
+                          >
+                            2D : 01H : 32M
+                          </Text>
+                        </View>
+                      </View>
+                    )}
+                  </View>
+                  {item.status !== "Completed" && (
+                    <View style={{ paddingHorizontal: 20 }}>
                       <View
-                        style={[
-                          styles.button,
-                          { backgroundColor: COLORS.errorBackground },
-                        ]}
+                        style={{
+                          borderRadius: 20,
+                          backgroundColor: COLORS.white,
+                          height: 7,
+                          overflow: "hidden",
+                        }}
                       >
-                        <Text style={{ fontSize: 14, color: COLORS.errorText }}>
-                          2D : 01H : 32M
+                        <View
+                          style={{
+                            width: `${progress}%`,
+                            backgroundColor: COLORS.brand,
+                            height: "100%",
+                            borderRadius: 20,
+                          }}
+                        />
+                      </View>
+                      <View
+                        style={{
+                          flexDirection: "row",
+                          justifyContent: "space-between",
+                          marginVertical: 5,
+                        }}
+                      >
+                        <Text style={{ color: COLORS.black, fontSize: 14 }}>
+                          {item.scanned} scanned
+                        </Text>
+                        <Text style={{ color: COLORS.black, fontSize: 14 }}>
+                          {item.total - item.scanned} tickets left
                         </Text>
                       </View>
                     </View>
-                  </View>
-
-                  <View style={{ paddingHorizontal: 20 }}>
-                    <View
-                      style={{
-                        borderRadius: 20,
-                        backgroundColor: COLORS.white,
-                        height: 7,
-                        overflow: "hidden",
-                      }}
-                    >
-                      <View
-                        style={{
-                          width: `${progress}%`,
-                          backgroundColor: COLORS.brand,
-                          height: "100%",
-                          borderRadius: 20,
-                        }}
-                      />
-                    </View>
-                    <View
-                      style={{
-                        flexDirection: "row",
-                        justifyContent: "space-between",
-                        marginVertical: 5,
-                      }}
-                    >
-                      <Text style={{ color: COLORS.black, fontSize: 14 }}>
-                        {item.scanned} scanned
-                      </Text>
-                      <Text style={{ color: COLORS.black, fontSize: 14 }}>
-                        {item.total - item.scanned} tickets left
-                      </Text>
-                    </View>
-                  </View>
-                </View>
+                  )}
+                </TouchableOpacity>
               );
             })}
           </ScrollView>
@@ -174,7 +204,7 @@ const Dashboard = () => {
 
 const styles = StyleSheet.create({
   section: {
-    marginTop: 10,
+    paddingTop: 10,
   },
   label: {
     color: COLORS.grey,
@@ -220,7 +250,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderRadius: 10,
     paddingVertical: 5,
-    paddingHorizontal: 11,
+    paddingHorizontal: 13,
     flexDirection: "row",
     alignItems: "center",
     marginRight: 10,

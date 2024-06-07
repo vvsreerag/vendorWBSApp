@@ -15,4 +15,6 @@ export const ROUTES = {
   SUPPORT_AND_FAQ: "Support & FAQ",
   FAQ_DETAILS: "FAQ Details",
   ABOUT_US: "About Us",
+  COMPLETED_REQUESTS: "Completed requests",
+  REQUESTS: "Requests",
 };

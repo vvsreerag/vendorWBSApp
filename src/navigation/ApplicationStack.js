@@ -8,6 +8,9 @@ import VendorDetails from "../screens/Home/VendorDetails";
 import AboutUs from "../screens/Home/AboutUs";
 import SupportAndFAQ from "../screens/Home/SupportAndFAQ";
 import FAQDetails from "../screens/Home/FAQDetails";
+import SubHeaderComponents from "../components/SubHeaderComponents";
+import CompletedRequests from "../screens/Home/CompletedRequests";
+import Requests from "../screens/Home/Requests";
 
 const Stack = createNativeStackNavigator();
 
@@ -47,6 +50,24 @@ const ApplicationStack = () => {
             component={SupportAndFAQ}
           />
           <Stack.Screen name={ROUTES.FAQ_DETAILS} component={FAQDetails} />
+          <Stack.Screen
+            name={ROUTES.COMPLETED_REQUESTS}
+            component={CompletedRequests}
+            options={{
+              header: (props) => (
+                <SubHeaderComponents {...props} navigation={props.navigation} />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name={ROUTES.REQUESTS}
+            component={Requests}
+            options={{
+              header: (props) => (
+                <SubHeaderComponents {...props} navigation={props.navigation} />
+              ),
+            }}
+          />
         </Stack.Navigator>
       </SafeAreaView>
     </>

@@ -11,6 +11,7 @@ import FAQDetails from "../screens/Home/FAQDetails";
 import SubHeaderComponents from "../components/SubHeaderComponents";
 import CompletedRequests from "../screens/Home/CompletedRequests";
 import Requests from "../screens/Home/Requests";
+import CompletedTickets from "../screens/Home/CompletedTickets";
 
 const Stack = createNativeStackNavigator();
 
@@ -53,6 +54,15 @@ const ApplicationStack = () => {
           <Stack.Screen
             name={ROUTES.COMPLETED_REQUESTS}
             component={CompletedRequests}
+            options={{
+              header: (props) => (
+                <SubHeaderComponents {...props} navigation={props.navigation} />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name={ROUTES.COMPLETED_TICKETS}
+            component={CompletedTickets}
             options={{
               header: (props) => (
                 <SubHeaderComponents {...props} navigation={props.navigation} />

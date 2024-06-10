@@ -2,7 +2,7 @@ import React from "react";
 import { View, StyleSheet, Text } from "react-native";
 import { COLORS } from "../../constants";
 
-const RequestDetailsHeader = ({ title, description }) => {
+const RequestDetailsHeader = ({ title, description, incompleteRequest }) => {
   return (
     <View style={styles.detailsContainer}>
       <View>
@@ -11,13 +11,15 @@ const RequestDetailsHeader = ({ title, description }) => {
       </View>
 
       <View style={{ marginLeft: "auto" }}>
-        <View
-          style={[styles.button, { backgroundColor: COLORS.errorBackground }]}
-        >
-          <Text style={{ fontSize: 14, color: COLORS.errorText }}>
-            2D : 01H : 32M
-          </Text>
-        </View>
+        {incompleteRequest && (
+          <View
+            style={[styles.button, { backgroundColor: COLORS.errorBackground }]}
+          >
+            <Text style={{ fontSize: 14, color: COLORS.errorText }}>
+              2D : 01H : 32M
+            </Text>
+          </View>
+        )}
       </View>
     </View>
   );

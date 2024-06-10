@@ -7,13 +7,13 @@ import {
   FontAwesome5,
 } from "@expo/vector-icons";
 
-const TicketItems = ({ number, lines, file, completed }) => {
-  const [markAsDone, setMarkAsDone] = useState(true);
+const TicketItems = ({ number, lines, file, completed, onClick }) => {
+  const [markAsDone, setMarkAsDone] = useState(false);
   return (
-    <View style={styles.ticketContainer}>
+    <TouchableOpacity style={styles.ticketContainer} onPress={onClick}>
       <View style={styles.ticketRow}>
         <TouchableOpacity onPress={() => setMarkAsDone(!markAsDone)}>
-          {markAsDone && completed ? (
+          {markAsDone || completed ? (
             <MaterialCommunityIcons
               name="check-circle-outline"
               size={24}
@@ -44,7 +44,7 @@ const TicketItems = ({ number, lines, file, completed }) => {
           <Text style={styles.fileText}>{file}</Text>
         </View>
       )}
-    </View>
+    </TouchableOpacity>
   );
 };
 const styles = StyleSheet.create({

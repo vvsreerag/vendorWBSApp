@@ -17,4 +17,5 @@ export const ROUTES = {
   ABOUT_US: "About Us",
   COMPLETED_REQUESTS: "Completed requests",
   REQUESTS: "Requests",
+  COMPLETED_TICKETS: "Completed Tickets",
 };

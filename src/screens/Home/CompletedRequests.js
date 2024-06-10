@@ -1,6 +1,6 @@
 import React from "react";
 import { ScrollView, StyleSheet, Text, View } from "react-native";
-import { COLORS } from "../../constants";
+import { COLORS, ROUTES } from "../../constants";
 import SubHeaderComponents from "../../components/SubHeaderComponents";
 import { useNavigation } from "@react-navigation/native";
 import { Ionicons, MaterialIcons, FontAwesome5 } from "@expo/vector-icons";
@@ -25,7 +25,13 @@ const CompletedRequests = () => {
         <Text style={styles.scanTicketsText}>SCAN TICKETS</Text>
       </View>
       <ScrollView showsVerticalScrollIndicator={false}>
-        <TicketItems number={1} lines={10} file="SCANNEDFILE.PDF" completed />
+        <TicketItems
+          number={1}
+          lines={10}
+          file="SCANNEDFILE.PDF"
+          completed
+          onClick={() => navigation.navigate(ROUTES.COMPLETED_TICKETS)}
+        />
         <TicketItems number={2} lines={10} file="SCANNEDFILE.PDF" completed />
         <TicketItems number={3} lines={10} file="SCANNEDFILE.PDF" completed />
         <TicketItems number={4} lines={10} file="SCANNEDFILE.PDF" completed />

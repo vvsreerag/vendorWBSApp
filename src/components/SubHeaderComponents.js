@@ -1,13 +1,27 @@
-import React from "react";
+import React, { useState } from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { COLORS } from "../constants";
 import { useNavigation } from "@react-navigation/native";
-import { Ionicons, MaterialIcons } from "@expo/vector-icons";
+import { Ionicons, MaterialIcons, Octicons } from "@expo/vector-icons";
+import DeleteTicketModal from "./Modal/DeleteTicketModal";
 
-const SubHeaderComponents = ({ download, discard, callBackDiscard }) => {
+const SubHeaderComponents = ({
+  download,
+  discard,
+  callBackDiscard,
+  deleteContent,
+}) => {
   const navigation = useNavigation();
+
+  const [isOpenDeletedModal, setIsOpenDeleteModal] = useState(false);
   return (
     <View>
+      {deleteContent && (
+        <DeleteTicketModal
+          isOpenModal={isOpenDeletedModal}
+          closeModal={() => setIsOpenDeleteModal(false)}
+        />
+      )}
       <View style={{ backgroundColor: COLORS.white }}>
         <View
           style={{
@@ -39,6 +53,11 @@ const SubHeaderComponents = ({ download, discard, callBackDiscard }) => {
                   size={24}
                   color={COLORS.grey}
                 />
+              </TouchableOpacity>
+            )}
+            {deleteContent && (
+              <TouchableOpacity onPress={() => setIsOpenDeleteModal(true)}>
+                <Octicons name="trash" size={24} color={COLORS.grey} />
               </TouchableOpacity>
             )}
           </View>

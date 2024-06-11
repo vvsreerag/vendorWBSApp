@@ -1,16 +1,24 @@
 import React from "react";
-import { StyleSheet, View, Text, ScrollView } from "react-native";
+import {
+  StyleSheet,
+  View,
+  Text,
+  ScrollView,
+  TouchableOpacity,
+} from "react-native";
 import { COLORS } from "../../constants";
 import SubHeaderComponents from "../../components/SubHeaderComponents";
 import RequestDetailsHeader from "../../components/Menu/RequestDetailsHeader";
 import RequestHeaderStatus from "../../components/Menu/RequestHeaderStatus";
 import TicketItems from "../../components/Menu/TicketItems";
 import RequestInfoHeader from "../../components/Menu/RequestInfoHeader";
+import { Ionicons } from "@expo/vector-icons";
 
 const Requests = () => {
   return (
     <View style={styles.container}>
-      <SubHeaderComponents />
+      <SubHeaderComponents deleteContent />
+
       <RequestDetailsHeader
         title="SYN123323423"
         description="Request Date 24 May 2024, 13:20"
@@ -56,7 +64,42 @@ const Requests = () => {
         <TicketItems number={2} lines={10} />
         <TicketItems number={3} lines={10} />
         <TicketItems number={4} lines={10} />
+        <TicketItems number={4} lines={10} />
+        <TicketItems number={4} lines={10} />
+        <TicketItems number={4} lines={10} />
+        <TicketItems number={4} lines={10} />
+        <TicketItems number={4} lines={10} />
+        <TicketItems number={4} lines={10} />
+        <TicketItems number={4} lines={10} />
+        <TicketItems number={4} lines={10} />
+        <TicketItems number={4} lines={10} />
+        <TicketItems number={10} lines={10} />
       </ScrollView>
+      <View
+        style={{
+          backgroundColor: COLORS.lightGrey,
+          paddingHorizontal: 20,
+          paddingVertical: 8,
+          flexDirection: "row",
+          alignItems: "center",
+        }}
+      >
+        <Text style={styles.scanTicketsText}>
+          Mark as Print Complete to start scanning tickets.
+        </Text>
+        <TouchableOpacity style={{ marginLeft: "auto" }}>
+          <Ionicons name="close" size={24} color={COLORS.grey} />
+        </TouchableOpacity>
+      </View>
+      <View style={{ ...styles.section, justifyContent: "center" }}>
+        <TouchableOpacity style={styles.mainButton}>
+          <Text
+            style={{ fontSize: 14, fontWeight: "700", color: COLORS.white }}
+          >
+            Print Complete
+          </Text>
+        </TouchableOpacity>
+      </View>
     </View>
   );
 };
@@ -64,6 +107,12 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.lightGrey,
+  },
+  section: {
+    paddingHorizontal: 20,
+    paddingVertical: 10,
+    backgroundColor: COLORS.white,
+    elevation: 4,
   },
   scanTickets: {
     paddingVertical: 5,
@@ -73,6 +122,17 @@ const styles = StyleSheet.create({
     color: COLORS.grey,
     fontSize: 14,
     fontWeight: "500",
+  },
+  mainButton: {
+    backgroundColor: COLORS.brand,
+    borderColor: COLORS.brand,
+    borderWidth: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 50,
   },
 });
 

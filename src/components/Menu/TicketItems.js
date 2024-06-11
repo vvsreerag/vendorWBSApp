@@ -23,7 +23,7 @@ const TicketItems = ({ number, lines, file, completed, onClick }) => {
             <MaterialCommunityIcons
               name="checkbox-blank-circle-outline"
               size={24}
-              color={COLORS.border}
+              color={COLORS.grey}
             />
           )}
         </TouchableOpacity>

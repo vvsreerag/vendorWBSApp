@@ -102,6 +102,21 @@ const Dashboard = () => {
               <RequestItem />
             </ScrollView>
           </View>
+          <View
+            style={{
+              marginBottom: 10,
+              justifyContent: "center",
+              alignItems: "center",
+            }}
+          >
+            <TouchableOpacity
+              onPress={() => navigation.navigate(ROUTES.PENDING_REVIEW_REQUEST)}
+            >
+              <Text style={{ color: COLORS.brand, fontWeight: "700" }}>
+                View All
+              </Text>
+            </TouchableOpacity>
+          </View>
         </View>
       )}
 
@@ -117,9 +132,17 @@ const Dashboard = () => {
                 <TouchableOpacity
                   key={item.id}
                   style={styles.itemContainer}
-                  onPress={() => navigation.navigate(ROUTES.REQUESTS)}
+                  onPress={() => navigation.navigate(ROUTES.COMPLETED_REQUESTS)}
                 >
-                  <View style={styles.itemContainerContent}>
+                  <View
+                    style={[
+                      styles.itemContainerContent,
+                      item.status === "Completed" && {
+                        borderBottomLeftRadius: 15,
+                        borderBottomRightRadius: 15,
+                      },
+                    ]}
+                  >
                     {item.status === "Completed" ? (
                       <MaterialCommunityIcons
                         name="progress-check"
@@ -287,7 +310,6 @@ const styles = StyleSheet.create({
     paddingVertical: 10,
     borderTopRightRadius: 15,
     borderTopLeftRadius: 15,
-    marginBottom: 10,
     flexDirection: "row",
     gap: 10,
   },

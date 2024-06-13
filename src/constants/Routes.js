@@ -18,4 +18,5 @@ export const ROUTES = {
   COMPLETED_REQUESTS: "Completed requests",
   REQUESTS: "Requests",
   COMPLETED_TICKETS: "Completed Tickets",
+  PENDING_REVIEW_REQUEST: "Pending review request",
 };

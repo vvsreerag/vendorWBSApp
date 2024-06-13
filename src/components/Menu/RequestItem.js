@@ -15,7 +15,7 @@ import { COLORS } from "../../constants";
 
 const { width } = Dimensions.get("window");
 
-const RequestItem = () => {
+const RequestItem = ({ disableAction }) => {
   return (
     <View style={styles.container}>
       <View style={styles.row}>
@@ -65,16 +65,18 @@ const RequestItem = () => {
         </View>
       </View>
 
-      <View style={styles.buttonContainer}>
-        <TouchableOpacity style={[styles.button, styles.rejectButton]}>
-          <Ionicons name="close" size={20} color={COLORS.brand} />
-          <Text style={styles.rejectButtonText}>Reject</Text>
-        </TouchableOpacity>
-        <TouchableOpacity style={[styles.button, styles.mainButton]}>
-          <Ionicons name="checkmark-sharp" size={20} color={COLORS.white} />
-          <Text style={styles.buttonText}>Accept</Text>
-        </TouchableOpacity>
-      </View>
+      {!disableAction && (
+        <View style={styles.buttonContainer}>
+          <TouchableOpacity style={[styles.button, styles.rejectButton]}>
+            <Ionicons name="close" size={20} color={COLORS.brand} />
+            <Text style={styles.rejectButtonText}>Reject</Text>
+          </TouchableOpacity>
+          <TouchableOpacity style={[styles.button, styles.mainButton]}>
+            <Ionicons name="checkmark-sharp" size={20} color={COLORS.white} />
+            <Text style={styles.buttonText}>Accept</Text>
+          </TouchableOpacity>
+        </View>
+      )}
     </View>
   );
 };

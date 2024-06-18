@@ -1,5 +1,6 @@
 import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 import AsyncStorage from "@react-native-async-storage/async-storage";
+import authService from "../../../service/authService";
 
 const initAuthState = async () => {
   let loggedUser = await AsyncStorage.getItem("logged_user");
@@ -13,7 +14,7 @@ const initialState = {
 };
 
 export const login = createAsyncThunk("authentication/login", async (data) => {
-  const response = data;
+  const response = await authService.login(data);
   return response;
 });
 

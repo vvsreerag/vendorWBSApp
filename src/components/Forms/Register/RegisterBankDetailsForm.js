@@ -15,17 +15,17 @@ const RegisterBankDetailsForm = ({ value, onChangeText, errorInput }) => {
         Bank Details
       </Text>
       <ScrollView>
-        <OutlinedSelectInput label="Bank Name" onSelect={handleSelect}>
-          <OutlinedSelectInput.Option label="Option 1" value="option1" />
-          <OutlinedSelectInput.Option label="Option 2" value="option2" />
-          <OutlinedSelectInput.Option label="Option 3" value="option3" />
+        <OutlinedSelectInput
+          label="Bank Name"
+          onSelect={handleSelect}
+          placeHolder="Select your Bank"
+        >
+          <OutlinedSelectInput.Option label="Barclays" value="barclays" />
+          <OutlinedSelectInput.Option label="Lloyds" value="lloyds" />
+          <OutlinedSelectInput.Option label="HSBC" value="hsbc" />
+          <OutlinedSelectInput.Option label="NatWest" value="natwest" />
         </OutlinedSelectInput>
-        <OutlinedTextInput
-          label={"Bank Name"}
-          value={value.bankName}
-          onChangeText={(value) => onChangeText("bankName")(value)}
-          errorInput={errorInput.bankName}
-        />
+
         {errorInput?.bankName && (
           <View
             style={{

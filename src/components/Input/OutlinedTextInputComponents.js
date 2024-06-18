@@ -20,6 +20,8 @@ const OutlinedTextInput = ({
   password,
   errorInput,
   buttonType,
+  multiline, // Add this prop to support multiline behavior
+  numberOfLines, // Add this prop to specify the number of lines
 }) => {
   const [isFocused, setIsFocused] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -35,81 +37,105 @@ const OutlinedTextInput = ({
   const toggleShowPassword = () => {
     setShowPassword(!showPassword);
   };
-  return (
-    <View style={[styles.container, errorInput ? styles.errorInput : null]}>
-      <Text
-        style={[
-          styles.label,
-          (isFocused || value) && !disabled ? styles.labelFocused : null,
-          disabled ? styles.labelDisabled : null,
-          errorInput ? styles.errorLabel : null,
-        ]}
-      >
-        {label}
-      </Text>
 
-      <View
-        style={{
-          flexDirection: "row",
-        }}
-      >
-        {phone && (
+  return (
+    <>
+      <View style={[styles.container, errorInput ? styles.errorInput : null]}>
+        <Text
+          style={[
+            styles.label,
+            (isFocused || value) && !disabled ? styles.labelFocused : null,
+            disabled ? styles.labelDisabled : null,
+            errorInput ? styles.errorLabel : null,
+          ]}
+        >
+          {label}
+        </Text>
+
+        <View
+          style={{
+            flexDirection: "row",
+          }}
+        >
+          {phone && (
+            <View
+              style={{
+                flex: 1.2,
+                justifyContent: "center",
+                alignItems: "center",
+              }}
+            >
+              <View
+                style={{
+                  borderRightColor: COLORS.lightGrey,
+                  borderRightWidth: 2,
+                }}
+              >
+                <Text style={{ marginRight: 8 }}>+44</Text>
+              </View>
+            </View>
+          )}
+          <View style={phone ? { flex: 8 } : { flex: 9.2 }}>
+            {buttonType ? (
+              <View style={{ ...styles.input, height: 35 }} />
+            ) : (
+              <>
+                <TextInput
+                  style={[
+                    styles.input,
+                    multiline ? styles.multilineInput : null, // Apply multiline styles
+                    disabled ? styles.inputDisabled : null,
+                  ]}
+                  value={value}
+                  onChangeText={onChangeText}
+                  onFocus={handleFocus}
+                  onBlur={handleBlur}
+                  editable={!disabled} // Disable input if 'disabled' is true
+                  maxLength={maxLength || 200}
+                  keyboardType={numericOnly ? "numeric" : "default"}
+                  secureTextEntry={!showPassword && password}
+                  multiline={multiline}
+                  numberOfLines={multiline && (numberOfLines || 100)}
+                />
+              </>
+            )}
+          </View>
+
           <View
             style={{
-              flex: 1.2,
+              flex: 0.8,
               justifyContent: "center",
               alignItems: "center",
             }}
           >
-            <View
-              style={{
-                borderRightColor: COLORS.lightGrey,
-                borderRightWidth: 2,
-              }}
-            >
-              <Text style={{ marginRight: 8 }}>+44</Text>
-            </View>
-          </View>
-        )}
-        <View style={phone ? { flex: 8 } : { flex: 9.2 }}>
-          {buttonType ? (
-            <View style={{ ...styles.input, height: 35 }} />
-          ) : (
-            <TextInput
-              style={[styles.input, disabled ? styles.inputDisabled : null]}
-              value={value}
-              onChangeText={onChangeText}
-              onFocus={handleFocus}
-              onBlur={handleBlur}
-              editable={!disabled} // Disable input if 'disabled' is true
-              maxLength={maxLength || 200}
-              keyboardType={numericOnly ? "numeric" : "default"}
-              secureTextEntry={!showPassword && password}
-            />
-          )}
-        </View>
-
-        <View
-          style={{ flex: 0.8, justifyContent: "center", alignItems: "center" }}
-        >
-          {password ? (
-            <TouchableOpacity onPress={toggleShowPassword}>
-              <Ionicons
-                name={showPassword ? "eye" : "eye-off"}
-                size={20}
-                color="black"
-              />
-            </TouchableOpacity>
-          ) : (
-            value && (
-              <TouchableOpacity onPress={() => onChangeText("")}>
-                <Ionicons name="close-circle-outline" size={20} color="grey" />
+            {password ? (
+              <TouchableOpacity onPress={toggleShowPassword}>
+                <Ionicons
+                  name={showPassword ? "eye" : "eye-off"}
+                  size={20}
+                  color="black"
+                />
               </TouchableOpacity>
-            )
-          )}
+            ) : (
+              value && (
+                <TouchableOpacity onPress={() => onChangeText("")}>
+                  <Ionicons
+                    name="close-circle-outline"
+                    size={20}
+                    color="grey"
+                  />
+                </TouchableOpacity>
+              )
+            )}
+          </View>
         </View>
       </View>
-    </View>
+      {multiline && (
+        <Text style={styles.charCount}>
+          {value.length}/{maxLength || 200} characters
+        </Text>
+      )}
+    </>
   );
 };
 
@@ -118,7 +144,6 @@ const styles = StyleSheet.create({
     marginTop: 10,
     borderWidth: 1,
     borderColor: "#000000", // Border color when focused
-
     borderRadius: 2,
     padding: 5,
     marginBottom: 5,
@@ -151,6 +176,16 @@ const styles = StyleSheet.create({
   },
   inputDisabled: {
     color: "#2E2E2E", // Input text color when disabled
+  },
+  multilineInput: {
+    height: 200, // Adjust the height for multiline input
+    textAlignVertical: "top", // Align text to the top for multiline input
+  },
+  charCount: {
+    textAlign: "right",
+    marginTop: 1,
+    color: "grey",
+    fontSize: 12,
   },
 });
 

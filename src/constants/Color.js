@@ -1,6 +1,7 @@
 export const COLORS = {
   primary: "#ffffff",
   grey: "#79747E",
+  border: "#EBECF3",
   darkGrey: "#49454F",
   black: "#000000",
   lightGrey: "#F6F7F9",
@@ -10,4 +11,7 @@ export const COLORS = {
   green: "#08912e",
   lightGreen: "#c8e6c9",
   red: "#B3261E",
+  yellow: "#FDCB07",
+  errorBackground: "#E8CCD6",
+  errorText: "#D50000",
 };

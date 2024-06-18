@@ -11,6 +11,8 @@ export const ROUTES = {
   EARNING: "Earning",
   PROFILE: "Profile",
   VENDOR_DETAILS: "Vendor Details",
+  EDIT_VENDOR_DETAILS: "Edit Vendor Details",
+  DELETE_ACCOUNT: "Delete Account",
   TRANSACTION_HISTORY: "Transaction History",
   SUPPORT_AND_FAQ: "Support & FAQ",
   FAQ_DETAILS: "FAQ Details",

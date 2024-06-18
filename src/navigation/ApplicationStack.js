@@ -13,6 +13,8 @@ import CompletedRequests from "../screens/Home/CompletedRequests";
 import Requests from "../screens/Home/Requests";
 import CompletedTickets from "../screens/Home/CompletedTickets";
 import PendingReviewRequest from "../screens/Home/PendingReviewRequest";
+import EditVendorDetails from "../screens/Home/EditVendorDetails";
+import DeleteAccount from "../screens/Home/DeleteAccount";
 
 const Stack = createNativeStackNavigator();
 
@@ -82,6 +84,24 @@ const ApplicationStack = () => {
           <Stack.Screen
             name={ROUTES.PENDING_REVIEW_REQUEST}
             component={PendingReviewRequest}
+            options={{
+              header: (props) => (
+                <SubHeaderComponents {...props} navigation={props.navigation} />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name={ROUTES.EDIT_VENDOR_DETAILS}
+            component={EditVendorDetails}
+            options={{
+              header: (props) => (
+                <SubHeaderComponents {...props} navigation={props.navigation} />
+              ),
+            }}
+          />
+          <Stack.Screen
+            name={ROUTES.DELETE_ACCOUNT}
+            component={DeleteAccount}
             options={{
               header: (props) => (
                 <SubHeaderComponents {...props} navigation={props.navigation} />

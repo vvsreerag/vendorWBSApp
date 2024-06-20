@@ -15,6 +15,7 @@ import CompletedTickets from "../screens/Home/CompletedTickets";
 import PendingReviewRequest from "../screens/Home/PendingReviewRequest";
 import EditVendorDetails from "../screens/Home/EditVendorDetails";
 import DeleteAccount from "../screens/Home/DeleteAccount";
+import TicketScanner from "../components/Menu/TicketScanner";
 
 const Stack = createNativeStackNavigator();
 
@@ -107,6 +108,10 @@ const ApplicationStack = () => {
                 <SubHeaderComponents {...props} navigation={props.navigation} />
               ),
             }}
+          />
+          <Stack.Screen
+            name={ROUTES.TICKET_SCANNER}
+            component={TicketScanner}
           />
         </Stack.Navigator>
       </SafeAreaView>

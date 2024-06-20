@@ -1,7 +1,8 @@
 import React from "react";
 import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
-import { COLORS } from "../../constants";
+import { COLORS, ROUTES } from "../../constants";
 import { MaterialIcons, Ionicons } from "@expo/vector-icons";
+import { useNavigation } from "@react-navigation/native";
 
 const InfoRow = ({ icon, label, value, additionalValue, style }) => (
   <View style={[styles.infoRow, style]}>
@@ -21,6 +22,7 @@ const InfoRow = ({ icon, label, value, additionalValue, style }) => (
 );
 
 const RequestCompletedTicketHeader = ({ drawNumber, date }) => {
+  const navigation = useNavigation();
   return (
     <View style={styles.infoContainer}>
       <View style={styles.doubleInfoRow}>
@@ -54,6 +56,14 @@ const RequestCompletedTicketHeader = ({ drawNumber, date }) => {
           </View>
         </View>
       </View>
+      <TouchableOpacity
+        style={styles.mainButton}
+        onPress={() => navigation.navigate(ROUTES.TICKET_SCANNER)}
+      >
+        <Text style={{ fontSize: 14, fontWeight: "700", color: COLORS.brand }}>
+          Scan Ticket
+        </Text>
+      </TouchableOpacity>
     </View>
   );
 };
@@ -123,6 +133,18 @@ const styles = StyleSheet.create({
   fileSize: {
     fontSize: 12,
     color: COLORS.grey,
+  },
+  mainButton: {
+    backgroundColor: COLORS.white,
+    borderColor: COLORS.brand,
+    borderWidth: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    width: "100%",
+    paddingTop: 10,
+    paddingBottom: 10,
+    borderRadius: 50,
+    marginTop: 20,
   },
 });
 

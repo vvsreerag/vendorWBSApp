@@ -57,6 +57,7 @@ const HelpRequest = () => {
         visible={discardModal}
         onClose={setDiscardModal}
         onDiscard={handleDiscardContactForm}
+        type="discard"
       />
       <View style={styles.content}>
         <Text style={styles.title}>Help Request</Text>

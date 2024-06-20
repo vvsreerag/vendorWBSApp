@@ -13,30 +13,30 @@ import WBCheckBox from "../../components/WBCheckBox";
 import { Ionicons } from "@expo/vector-icons";
 
 const PendingReviewRequest = () => {
-  const [checkedItems, setCheckedItems] = useState({});
+  //   const [checkedItems, setCheckedItems] = useState({});
 
-  const toggleCheckbox = (id) => {
-    setCheckedItems((prevState) => ({
-      ...prevState,
-      [id]: !prevState[id],
-    }));
-  };
+  //   const toggleCheckbox = (id) => {
+  //     setCheckedItems((prevState) => ({
+  //       ...prevState,
+  //       [id]: !prevState[id],
+  //     }));
+  //   };
 
-  const handleSelectAll = () => {
-    const newCheckedItems = {};
-    if (Object.values(checkedItems).some((value) => value)) {
-      // Deselect all
-      setCheckedItems({});
-    } else {
-      // Select all
-      [1, 2, 3, 4, 5, 6].forEach((id) => {
-        newCheckedItems[id] = true;
-      });
-      setCheckedItems(newCheckedItems);
-    }
-  };
+  //   const handleSelectAll = () => {
+  //     const newCheckedItems = {};
+  //     if (Object.values(checkedItems).some((value) => value)) {
+  //       // Deselect all
+  //       setCheckedItems({});
+  //     } else {
+  //       // Select all
+  //       [1, 2, 3, 4, 5, 6].forEach((id) => {
+  //         newCheckedItems[id] = true;
+  //       });
+  //       setCheckedItems(newCheckedItems);
+  //     }
+  //   };
 
-  const isAnySelected = Object.values(checkedItems).some((value) => value);
+  //   const isAnySelected = Object.values(checkedItems).some((value) => value);
 
   return (
     <View style={styles.container}>
@@ -44,11 +44,11 @@ const PendingReviewRequest = () => {
       <View style={styles.content}>
         <View style={styles.headerContainer}>
           <Text style={styles.header}>Review Requests</Text>
-          <TouchableOpacity onPress={handleSelectAll}>
+          {/* <TouchableOpacity onPress={handleSelectAll}>
             <Text style={styles.selectAllText}>
               {isAnySelected ? "Deselect All" : "Select All"}
             </Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </View>
         <ScrollView
           contentContainerStyle={styles.scrollContent}
@@ -56,16 +56,16 @@ const PendingReviewRequest = () => {
         >
           {[1, 2, 3, 4, 5, 6].map((id) => (
             <View key={id} style={styles.requestItemContainer}>
-              <RequestItem disableAction />
-              <WBCheckBox
+              <RequestItem fullWidth />
+              {/* <WBCheckBox
                 isChecked={!!checkedItems[id]}
                 onPress={() => toggleCheckbox(id)}
-              />
+              /> */}
             </View>
           ))}
         </ScrollView>
       </View>
-      <View style={styles.buttonsContainer}>
+      {/* <View style={styles.buttonsContainer}>
         <TouchableOpacity
           style={[
             styles.button,
@@ -110,7 +110,7 @@ const PendingReviewRequest = () => {
             Accept
           </Text>
         </TouchableOpacity>
-      </View>
+      </View> */}
     </View>
   );
 };
@@ -139,10 +139,10 @@ const styles = StyleSheet.create({
     flex: 1,
     backgroundColor: COLORS.white,
     paddingHorizontal: 20,
-    paddingBottom: 80, // To ensure scrollable area doesn't overlap with fixed buttons
   },
   scrollContent: {
     gap: 10,
+    paddingBottom: 20,
   },
   requestItemContainer: {
     flexDirection: "row",

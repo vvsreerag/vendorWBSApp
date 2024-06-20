@@ -4,7 +4,7 @@ import { Ionicons } from "@expo/vector-icons";
 import { COLORS } from "../../constants";
 import { Foundation } from "@expo/vector-icons";
 
-const DiscardAlert = ({ visible, onClose, onDiscard }) => {
+const DiscardAlert = ({ visible, onClose, onDiscard, type }) => {
   return (
     <Modal
       animationType="fade"
@@ -28,14 +28,24 @@ const DiscardAlert = ({ visible, onClose, onDiscard }) => {
             }}
           />
           <Text style={styles.message}>
-            Are you sure you want to discard all changes?
+            {type === "discard"
+              ? "Are you sure you want to discard all changes?"
+              : type === "delete_account"
+              ? "Are you sure you want to delete your account?"
+              : ""}
           </Text>
           <View style={styles.buttonContainer}>
             <TouchableOpacity
               onPress={onDiscard}
               style={[styles.button, styles.discardButton]}
             >
-              <Text style={styles.discardButtonText}>Discard</Text>
+              <Text style={styles.discardButtonText}>
+                {type === "discard"
+                  ? "Discard"
+                  : type === "delete_account"
+                  ? "Delete Account"
+                  : ""}
+              </Text>
             </TouchableOpacity>
             <TouchableOpacity
               onPress={onClose}

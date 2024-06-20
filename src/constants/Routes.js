@@ -21,4 +21,6 @@ export const ROUTES = {
   REQUESTS: "Requests",
   COMPLETED_TICKETS: "Completed Tickets",
   PENDING_REVIEW_REQUEST: "Pending review request",
+
+  TICKET_SCANNER: "Ticket Scanner",
 };

@@ -15,9 +15,14 @@ import { COLORS } from "../../constants";
 
 const { width } = Dimensions.get("window");
 
-const RequestItem = ({ disableAction }) => {
+const RequestItem = ({ fullWidth, disableAction }) => {
   return (
-    <View style={styles.container}>
+    <View
+      style={[
+        styles.container,
+        fullWidth ? { flex: 1 } : { width: width * 0.8 },
+      ]}
+    >
       <View style={styles.row}>
         <MaterialCommunityIcons
           name="progress-clock"
@@ -83,7 +88,6 @@ const RequestItem = ({ disableAction }) => {
 
 const styles = StyleSheet.create({
   container: {
-    width: width * 0.8,
     borderRadius: 15,
     borderColor: COLORS.border,
     borderWidth: 1,

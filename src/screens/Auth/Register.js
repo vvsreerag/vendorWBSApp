@@ -20,8 +20,8 @@ import RegisterContactInfoForm from "../../components/Forms/Register/RegisterCon
 import RegisterDocumentForm from "../../components/Forms/Register/RegisterDocumentForm";
 import RegisterBankDetailsForm from "../../components/Forms/Register/RegisterBankDetailsForm";
 
-const Register = ({ navigation, route }) => {
-  const route = route.params;
+const Register = ({ route }) => {
+  const token = route.params;
   const [activeFlowTab, setActiveFlowTab] = useState(1);
   const [state, setState] = useState({
     companyEmail: "",
@@ -370,7 +370,7 @@ const Register = ({ navigation, route }) => {
                     </Text>
                   </View>
                 )}
-                <Text>{route}</Text>
+                <Text>{token}</Text>
                 <View
                   style={{
                     flex: 1,

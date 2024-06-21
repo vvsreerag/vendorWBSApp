@@ -19,7 +19,7 @@ const AuthenticationStack = () => {
     prefixes: [prefix],
     config: {
       screens: {
-        Register: "vendor-register/:token",
+        [ROUTES.REGISTER]: "vendorRegister/:token",
       },
     },
   };

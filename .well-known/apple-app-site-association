@@ -1,0 +1,27 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "9WY57Q7955.com.winBySyndicate.WBSPrint"
+        ],
+        "components": [
+          {
+            "/": "*",
+            "comment": "Matches all routes"
+          }
+        ]
+      }
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "9WY57Q7955.com.winBySyndicate.WBSPrint"
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "9WY57Q7955.com.winBySyndicate.WBSPrint"
+    ]
+  }
+}

@@ -9,10 +9,20 @@ import Login from "../screens/Auth/Login";
 import ForgotPassword from "../screens/Auth/ForgotPassword";
 import HelpRequest from "../screens/Common/HelpRequest";
 import SubHeaderComponents from "../components/SubHeaderComponents";
+import * as Linking from "expo-linking";
 
 const Stack = createNativeStackNavigator();
+const prefix = Linking.createURL("/");
 
 const AuthenticationStack = () => {
+  const linking = {
+    prefixes: [prefix],
+    config: {
+      screens: {
+        Register: "vendor-register/:token",
+      },
+    },
+  };
   return (
     <SafeAreaView
       style={{
@@ -31,6 +41,7 @@ const AuthenticationStack = () => {
           animationDuration: 500,
         }}
         initialRouteName={ROUTES.LANDING_PAGE}
+        linking={linking}
       >
         <Stack.Screen name={ROUTES.LANDING_PAGE} component={LandingPage} />
         <Stack.Screen

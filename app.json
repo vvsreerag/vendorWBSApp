@@ -12,15 +12,16 @@
       "backgroundColor": "#ffffff"
     },
     "assetBundlePatterns": ["**/*"],
-
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.winBySyndicate.VendorWinBySyndicate"
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
-      }
+      },
+      "package": "com.winBySyndicate.VendorWinBySyndicate"
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -32,6 +33,11 @@
           "cameraPermission": "We need camera access, so you can scan documents"
         }
       ]
-    ]
+    ],
+    "extra": {
+      "eas": {
+        "projectId": "3490d987-ab11-4d15-9625-644f0429b396"
+      }
+    }
   }
 }

@@ -21,7 +21,7 @@ import RegisterDocumentForm from "../../components/Forms/Register/RegisterDocume
 import RegisterBankDetailsForm from "../../components/Forms/Register/RegisterBankDetailsForm";
 
 const Register = ({ route }) => {
-  const token = route.params;
+  console.log(route.params);
   const [activeFlowTab, setActiveFlowTab] = useState(1);
   const [state, setState] = useState({
     companyEmail: "",
@@ -370,7 +370,6 @@ const Register = ({ route }) => {
                     </Text>
                   </View>
                 )}
-                <Text>{token}</Text>
                 <View
                   style={{
                     flex: 1,

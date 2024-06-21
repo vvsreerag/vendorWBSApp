@@ -14,14 +14,29 @@
     "assetBundlePatterns": ["**/*"],
     "ios": {
       "supportsTablet": true,
-      "bundleIdentifier": "com.winBySyndicate.WBSPrint"
+      "bundleIdentifier": "com.winBySyndicate.WBSPrint",
+      "associatedDomains": ["applinks:winbysydicate.com"]
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/adaptive-icon.png",
         "backgroundColor": "#ffffff"
       },
-      "package": "com.winBySyndicate.WBSPrint"
+      "package": "com.winBySyndicate.WBSPrint",
+      "intentFilters": [
+        {
+          "action": "VIEW",
+          "autoVerify": true,
+          "data": [
+            {
+              "scheme": "https",
+              "host": "*.winbysydicate.com",
+              "pathPrefix": "/vendor-register"
+            }
+          ],
+          "category": ["BROWSABLE", "DEFAULT"]
+        }
+      ]
     },
     "web": {
       "favicon": "./assets/favicon.png"
@@ -36,7 +51,7 @@
     ],
     "extra": {
       "eas": {
-        "projectId": "3490d987-ab11-4d15-9625-644f0429b396"
+        "projectId": "c23827a4-480e-4f0e-8cbf-3deeb36b3658"
       }
     }
   }

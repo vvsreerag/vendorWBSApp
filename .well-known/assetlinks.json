@@ -4,7 +4,9 @@
     "target": {
       "namespace": "android_app",
       "package_name": "com.winBySyndicate.WBSPrint",
-      "sha256_cert_fingerprints": ["{sha256_cert_fingerprints}"]
+      "sha256_cert_fingerprints": [
+        "5A:E7:6E:01:0C:F7:45:98:44:D5:AF:DD:ED:52:75:90:0C:07:8E:FD:02:10:3B:F3:3D:61:F0:7A:12:73:CE:52"
+      ]
     }
   }
 ]

@@ -28,7 +28,7 @@ const FAQDetails = ({ route, navigation }) => {
       ].indexOf(selectedItem);
       if (selectedItemIndex !== -1) {
         scrollViewRef.current.scrollTo({
-          x: selectedItemIndex * 150,
+          x: selectedItemIndex * 140,
           animated: true,
         });
       }
@@ -180,7 +180,6 @@ const styles = StyleSheet.create({
   container: {
     flex: 1,
     backgroundColor: COLORS.white,
-    paddingHorizontal: 20,
   },
   scrollViewContainer: {
     height: 40,
@@ -207,6 +206,7 @@ const styles = StyleSheet.create({
   contentContainer: {
     marginTop: 20,
     flex: 1,
+    paddingHorizontal: 20,
   },
   contentText: {
     fontSize: 16,

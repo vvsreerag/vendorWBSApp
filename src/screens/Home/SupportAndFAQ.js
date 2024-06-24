@@ -72,20 +72,28 @@ const SupportAndFAQ = () => {
           <ScrollView>
             <MenuItemGroup style={styles.menuGroup}>
               <MenuItem
-                name="Why am I not receiving the OTP?"
-                dropDescription={"hi how are you"}
+                name="How long does it take for account approval after registration?"
+                dropDescription={
+                  "It may take up to 48-72 hours for approval. A confirmation email will be sent to you once the account is approved."
+                }
               />
               <MenuItem
-                name="Why am I unable to log in to my account?"
-                dropDescription={"hi how are you"}
+                name="How do I create an account?"
+                dropDescription={
+                  "To create an account, click on the link sent to you via email. Fill in the required information asked at the time of account creation."
+                }
               />
               <MenuItem
-                name="How do I reset my password?"
-                dropDescription={"hi how are you"}
+                name="I forgot my password. How can I reset it?"
+                dropDescription={
+                  "Click on the 'Forgot Password?' link on the login page. Enter your registered email address, and we will send you instructions to reset your password."
+                }
               />
               <MenuItem
-                name="How do I update my contact details?"
-                dropDescription={"hi how are you"}
+                name="How do I update my account information?"
+                dropDescription={
+                  "Log in to your account, go to your profile settings, and edit your information. Don't forget to save the changes."
+                }
               />
             </MenuItemGroup>
           </ScrollView>

@@ -39,7 +39,7 @@ const ForgotPassword = () => {
         />
       </View>
       <View style={styles.container}>
-        <View style={{ flex: 9 }}>
+        <View style={{ flex: 1 }}>
           <View style={styles.content}>
             <Text style={styles.title}>Forgot Password</Text>
             <Text style={styles.subtitle}>
@@ -70,7 +70,16 @@ const ForgotPassword = () => {
             </View>
           </View>
         </View>
-        <View style={{ flex: 0.9 }}>
+        <View
+          style={{
+            backgroundColor: COLORS.white,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingVertical: 10,
+            borderTopWidth: 1,
+            borderTopColor: COLORS.lightGrey,
+          }}
+        >
           <View style={styles.content}>
             <TouchableOpacity style={styles.mainButton}>
               <Text

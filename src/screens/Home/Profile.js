@@ -1,5 +1,11 @@
 import React from "react";
-import { View, StyleSheet, Text, TouchableOpacity } from "react-native";
+import {
+  View,
+  StyleSheet,
+  Text,
+  TouchableOpacity,
+  ScrollView,
+} from "react-native";
 import { COLORS, ROUTES } from "../../constants";
 import MainHeaderComponents from "../../components/MainHeaderComponents";
 import MenuItemGroup from "../../components/Menu/MenuItemGroup";
@@ -13,64 +19,66 @@ const Profile = () => {
     <View style={styles.container}>
       <MainHeaderComponents />
       <View style={styles.contentContainer}>
-        <View style={styles.dateContainer}>
-          <View style={{ flexDirection: "row", paddingVertical: 10 }}>
-            <View></View>
-            <View>
-              <Text style={styles.headerText}>Company Name</Text>
-              <Text>username@gmail.com</Text>
-              <Text>+44 1234456646</Text>
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <View style={styles.dateContainer}>
+            <View style={{ flexDirection: "row", paddingVertical: 10 }}>
+              <View></View>
+              <View>
+                <Text style={styles.headerText}>Company Name</Text>
+                <Text>username@gmail.com</Text>
+                <Text>+44 1234456646</Text>
+              </View>
             </View>
           </View>
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.sectionLabel}>ACCOUNT DETAILS</Text>
-          <MenuItemGroup style={styles.menuGroup}>
-            <MenuItem
-              name="Vendor Details"
-              icon="insert-emoticon"
-              route={() => navigation.navigate(ROUTES.VENDOR_DETAILS)}
-            />
-            <MenuItem name="Order History" icon="receipt-long" />
-            <MenuItem
-              name="Transaction History"
-              icon="payments"
-              route={() => navigation.navigate(ROUTES.TRANSACTION_HISTORY)}
-            />
-          </MenuItemGroup>
-        </View>
-        <View style={styles.section}>
-          <Text style={styles.sectionLabel}>SUPPORT</Text>
-          <MenuItemGroup style={styles.menuGroup}>
-            <MenuItem
-              name="Support & FAQ"
-              icon="help-outline"
-              route={() => navigation.navigate(ROUTES.SUPPORT_AND_FAQ)}
-            />
-            <MenuItem name="Terms & Conditions" icon="assignment-add" />
-            <MenuItem name="Privacy Policy" icon="privacy-tip" />
-            <MenuItem
-              name="About Us"
-              icon="info-outline"
-              route={() => navigation.navigate(ROUTES.ABOUT_US)}
-            />
-          </MenuItemGroup>
-        </View>
-        <View style={styles.section}>
-          <TouchableOpacity style={styles.mainButton}>
-            <MaterialIcons name="logout" size={20} color={COLORS.brand} />
-            <Text
-              style={{
-                fontSize: 14,
-                fontWeight: "700",
-                color: COLORS.brand,
-                marginLeft: 5,
-              }}
-            >
-              Logout
-            </Text>
-          </TouchableOpacity>
-        </View>
+          <View style={styles.section}>
+            <Text style={styles.sectionLabel}>ACCOUNT DETAILS</Text>
+            <MenuItemGroup style={styles.menuGroup}>
+              <MenuItem
+                name="Vendor Details"
+                icon="insert-emoticon"
+                route={() => navigation.navigate(ROUTES.VENDOR_DETAILS)}
+              />
+              <MenuItem name="Order History" icon="receipt-long" />
+              <MenuItem
+                name="Transaction History"
+                icon="payments"
+                route={() => navigation.navigate(ROUTES.TRANSACTION_HISTORY)}
+              />
+            </MenuItemGroup>
+          </View>
+          <View style={styles.section}>
+            <Text style={styles.sectionLabel}>SUPPORT</Text>
+            <MenuItemGroup style={styles.menuGroup}>
+              <MenuItem
+                name="Support & FAQ"
+                icon="help-outline"
+                route={() => navigation.navigate(ROUTES.SUPPORT_AND_FAQ)}
+              />
+              <MenuItem name="Terms & Conditions" icon="assignment-add" />
+              <MenuItem name="Privacy Policy" icon="privacy-tip" />
+              <MenuItem
+                name="About Us"
+                icon="info-outline"
+                route={() => navigation.navigate(ROUTES.ABOUT_US)}
+              />
+            </MenuItemGroup>
+          </View>
+          <View style={styles.section}>
+            <TouchableOpacity style={styles.mainButton}>
+              <MaterialIcons name="logout" size={20} color={COLORS.brand} />
+              <Text
+                style={{
+                  fontSize: 14,
+                  fontWeight: "700",
+                  color: COLORS.brand,
+                  marginLeft: 5,
+                }}
+              >
+                Logout
+              </Text>
+            </TouchableOpacity>
+          </View>
+        </ScrollView>
       </View>
     </View>
   );

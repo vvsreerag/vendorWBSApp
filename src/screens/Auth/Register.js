@@ -718,6 +718,7 @@ const styles = StyleSheet.create({
     width: "100%",
     paddingTop: 10,
     paddingBottom: 10,
+    height: 40,
     borderRadius: 50,
   },
   disableMainButton: {

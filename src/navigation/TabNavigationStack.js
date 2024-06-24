@@ -32,6 +32,7 @@ const TabNavigationStack = () => {
         },
         tabBarActiveTintColor: COLORS.brand,
         tabBarInactiveTintColor: COLORS.darkGrey,
+        tabBarHideOnKeyboard: true,
         tabBarStyle: {
           height: 65,
           paddingBottom: 10,

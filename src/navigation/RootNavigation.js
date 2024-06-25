@@ -27,8 +27,8 @@ const RootNavigation = () => {
   const isLoggedIn = useSelector((state) => state.authentication.loggedIn);
   return (
     <NavigationContainer theme={navTheme} linking={linking}>
-      {/* {isLoggedIn ? <ApplicationStack /> : <AuthenticationStack />} */}
-      <ApplicationStack />
+      {isLoggedIn ? <ApplicationStack /> : <AuthenticationStack />}
+      {/* <ApplicationStack /> */}
     </NavigationContainer>
   );
 };

@@ -61,7 +61,7 @@ const HelpRequest = () => {
       />
       <View style={styles.content}>
         <Text style={styles.title}>Help Request</Text>
-        <ScrollView>
+        <ScrollView showsVerticalScrollIndicator={false}>
           <OutlinedSelectInput
             label="Category"
             onSelect={handleSelect}
@@ -105,11 +105,11 @@ const HelpRequest = () => {
             style={{ marginTop: 10 }}
           />
         </ScrollView>
-        <View style={styles.buttonContainer}>
-          <TouchableOpacity style={styles.mainButton} onPress={handleSubmit}>
-            <Text style={styles.buttonText}>Submit</Text>
-          </TouchableOpacity>
-        </View>
+      </View>
+      <View style={styles.buttonContainer}>
+        <TouchableOpacity style={styles.mainButton} onPress={handleSubmit}>
+          <Text style={styles.buttonText}>Submit</Text>
+        </TouchableOpacity>
       </View>
     </View>
   );
@@ -123,7 +123,6 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 10,
     paddingHorizontal: 20,
-    paddingBottom: 100, // Adjust as needed to leave space for the bottom button
   },
   title: {
     fontSize: 16,
@@ -131,16 +130,17 @@ const styles = StyleSheet.create({
     marginBottom: 10,
   },
   buttonContainer: {
-    position: "absolute",
-    bottom: 20,
-    left: 20,
-    right: 20,
+    paddingVertical: 10,
+    paddingHorizontal: 20,
+    backgroundColor: COLORS.white,
+    borderTopWidth: 1,
+    borderTopColor: COLORS.lightGrey,
   },
   mainButton: {
     backgroundColor: COLORS.brand,
     justifyContent: "center",
     alignItems: "center",
-    paddingVertical: 15,
+    paddingVertical: 10,
     borderRadius: 50,
   },
   buttonText: {

@@ -27,19 +27,23 @@ const CompletedRequests = () => {
       <ScrollView showsVerticalScrollIndicator={false}>
         <TicketItems
           number={1}
-          lines={10}
+          lines={7}
           file="SCANNEDFILE.PDF"
           completed
           onClick={() => navigation.navigate(ROUTES.COMPLETED_TICKETS)}
         />
-        <TicketItems number={2} lines={10} file="SCANNEDFILE.PDF" completed />
-        <TicketItems number={3} lines={10} file="SCANNEDFILE.PDF" completed />
-        <TicketItems number={4} lines={10} file="SCANNEDFILE.PDF" completed />
-        <TicketItems number={4} lines={10} file="SCANNEDFILE.PDF" completed />
-        <TicketItems number={4} lines={10} file="SCANNEDFILE.PDF" completed />
-        <TicketItems number={4} lines={10} file="SCANNEDFILE.PDF" completed />
-        <TicketItems number={4} lines={10} file="SCANNEDFILE.PDF" completed />
-        <TicketItems number={4} lines={10} file="SCANNEDFILE.PDF" completed />
+        <TicketItems number={2} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={3} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={4} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={5} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={6} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={7} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={8} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={9} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={10} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={11} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={12} lines={7} file="SCANNEDFILE.PDF" />
+        <TicketItems number={13} lines={6} file="SCANNEDFILE.PDF" />
       </ScrollView>
     </View>
   );

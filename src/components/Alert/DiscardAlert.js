@@ -90,7 +90,7 @@ const styles = StyleSheet.create({
     flexDirection: "row",
   },
   button: {
-    paddingVertical: 10,
+    paddingVertical: 8,
     paddingHorizontal: 20,
     borderRadius: 20,
     marginHorizontal: 10,

@@ -115,12 +115,12 @@ const styles = StyleSheet.create({
     paddingHorizontal: 20,
   },
   whiteText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "700",
     color: COLORS.white,
   },
   brandText: {
-    fontSize: 16,
+    fontSize: 14,
     fontWeight: "700",
     color: COLORS.brand,
   },

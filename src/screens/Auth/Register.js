@@ -339,6 +339,7 @@ const Register = ({ route }) => {
         count={8}
         active={activeFlowTab}
         navigatePrev={handleChangeBackNavigation}
+        noGoBack
       />
 
       <View style={styles.container}>

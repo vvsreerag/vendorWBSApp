@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from "react";
+import React from "react";
 import {
   Dimensions,
   Image,
@@ -17,67 +17,16 @@ const { width: screenWidth, height: screenHeight } = Dimensions.get("window");
 
 const LandingPage = () => {
   const navigation = useNavigation();
-  const scrollViewRef = useRef();
-  const [currentIndex, setCurrentIndex] = useState(1); // Start from the first duplicate item
-
-  useEffect(() => {
-    const intervalId = setInterval(() => {
-      setCurrentIndex((prevIndex) =>
-        prevIndex === carouselItems.length + 1 ? 1 : prevIndex + 1
-      );
-    }, 10000); // 10 seconds
-
-    return () => clearInterval(intervalId);
-  }, []);
-
-  useEffect(() => {
-    if (scrollViewRef.current) {
-      scrollViewRef.current.scrollTo({
-        x: currentIndex * screenWidth,
-        animated: true,
-      });
-    }
-  }, [currentIndex]);
-
-  const handleScroll = (event) => {
-    const contentOffsetX = event.nativeEvent.contentOffset.x;
-    const index = Math.round(contentOffsetX / screenWidth);
-
-    if (index === 0) {
-      scrollViewRef.current.scrollTo({
-        x: carouselItems.length * screenWidth,
-        animated: false,
-      });
-      setCurrentIndex(carouselItems.length);
-    } else if (index === carouselItems.length + 1) {
-      scrollViewRef.current.scrollTo({
-        x: screenWidth,
-        animated: false,
-      });
-      setCurrentIndex(1);
-    } else {
-      setCurrentIndex(index);
-    }
-  };
-
   return (
     <View style={styles.container}>
       <StatusBar barStyle="dark-content" backgroundColor={COLORS.lightGrey} />
       <View style={styles.landingHeader}>
         <ScrollView
-          ref={scrollViewRef}
           horizontal
           pagingEnabled
           showsHorizontalScrollIndicator={false}
-          contentContainerStyle={styles.scrollViewContainer}
-          onScroll={handleScroll}
-          scrollEventThrottle={16}
         >
-          {[
-            ...carouselItems.slice(-1),
-            ...carouselItems,
-            ...carouselItems.slice(0, 1),
-          ].map((item, index) => (
+          {carouselItems.map((item, index) => (
             <View key={index} style={styles.carouselItem}>
               <View style={{ backgroundColor: COLORS.lightGrey }}>
                 <Image source={item.image} style={styles.headerImage} />

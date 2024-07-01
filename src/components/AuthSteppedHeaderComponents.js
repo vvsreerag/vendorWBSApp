@@ -1,7 +1,7 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { COLORS } from "../constants";
+import { COLORS, ROUTES } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 
 const AuthSteppedHeaderComponents = ({
@@ -27,7 +27,13 @@ const AuthSteppedHeaderComponents = ({
         >
           {active === 1 ? (
             <>
-              {!noGoBack && (
+              {noGoBack ? (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(ROUTES.LANDING_PAGE)}
+                >
+                  <Ionicons name="close" size={24} color={COLORS.grey} />
+                </TouchableOpacity>
+              ) : (
                 <TouchableOpacity onPress={() => navigation.goBack()}>
                   <Ionicons
                     name="arrow-back-outline"

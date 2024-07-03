@@ -2,13 +2,15 @@ import AsyncStorage from "@react-native-async-storage/async-storage";
 import axios from "axios";
 
 const API_URL = "<YOUR_BASE_API_URL>";
-
+// API Services of Axios
+// Configuration for Axios
 const AxiosService = axios.create({
   baseURL: API_URL,
   responseType: "json",
   withCredentials: true,
 });
 
+// Set Access Token and Refresh Token on Axios Header.
 export const setAuthToken = async (token, refreshToken) => {
   if (token) {
     await AsyncStorage.setItem("access_token", token);
@@ -20,6 +22,7 @@ export const setAuthToken = async (token, refreshToken) => {
     delete AxiosService.defaults.headers.common["Authorization"];
   }
 };
+// Using Interceptors to access the refresh token and refresh access token
 AxiosService.interceptors.response.use(
   (response) => response,
   async (error) => {

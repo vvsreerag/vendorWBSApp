@@ -1,10 +1,15 @@
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import { Ionicons } from "@expo/vector-icons";
-import { COLORS } from "../constants";
+import { COLORS, ROUTES } from "../constants";
 import { useNavigation } from "@react-navigation/native";
 
-const AuthSteppedHeaderComponents = ({ count, active, navigatePrev }) => {
+const AuthSteppedHeaderComponents = ({
+  count,
+  active,
+  navigatePrev,
+  noGoBack,
+}) => {
   const remainingBar = Math.floor(parseInt(count, 10) - parseInt(active, 10));
   const completedBar = Math.floor(parseInt(count, 10) - remainingBar);
 
@@ -21,13 +26,23 @@ const AuthSteppedHeaderComponents = ({ count, active, navigatePrev }) => {
           }}
         >
           {active === 1 ? (
-            <TouchableOpacity onPress={() => navigation.goBack()}>
-              <Ionicons
-                name="arrow-back-outline"
-                size={24}
-                color={COLORS.grey}
-              />
-            </TouchableOpacity>
+            <>
+              {noGoBack ? (
+                <TouchableOpacity
+                  onPress={() => navigation.navigate(ROUTES.LANDING_PAGE)}
+                >
+                  <Ionicons name="close" size={24} color={COLORS.grey} />
+                </TouchableOpacity>
+              ) : (
+                <TouchableOpacity onPress={() => navigation.goBack()}>
+                  <Ionicons
+                    name="arrow-back-outline"
+                    size={24}
+                    color={COLORS.grey}
+                  />
+                </TouchableOpacity>
+              )}
+            </>
           ) : (
             <TouchableOpacity onPress={() => navigatePrev()}>
               <Ionicons

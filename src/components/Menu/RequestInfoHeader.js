@@ -30,7 +30,7 @@ const RequestInfoHeader = ({
       <InfoRow
         icon={<Ionicons name="receipt" size={20} color={COLORS.black} />}
         label="NUMBER OF TICKETS"
-        value={numberOfTickets || "10 (100 Lines)"}
+        value={numberOfTickets || "13 (100 Lines)"}
       />
       <View style={styles.doubleInfoRow}>
         <InfoRow
@@ -39,7 +39,7 @@ const RequestInfoHeader = ({
           }
           label="PAYMENT STATUS"
           value="PAID"
-          additionalValue={amount || "£180.00"}
+          additionalValue={amount || "£200.00"}
           style={{ flex: 1 }}
         />
         <InfoRow

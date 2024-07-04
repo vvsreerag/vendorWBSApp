@@ -1,0 +1,27 @@
+{
+  "applinks": {
+    "details": [
+      {
+        "appIDs": [
+          "9WY57Q7955.com.winBySyndicate.WBSPrint"
+        ],
+        "components": [
+          {
+            "/vendor-register/": "*",
+            "comment": "Matches all routes to vendor register"
+          }
+        ]
+      }
+    ]
+  },
+  "activitycontinuation": {
+    "apps": [
+      "9WY57Q7955.com.winBySyndicate.WBSPrint"
+    ]
+  },
+  "webcredentials": {
+    "apps": [
+      "9WY57Q7955.com.winBySyndicate.WBSPrint"
+    ]
+  }
+}

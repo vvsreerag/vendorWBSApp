@@ -20,8 +20,9 @@ import RegisterContactInfoForm from "../../components/Forms/Register/RegisterCon
 import RegisterDocumentForm from "../../components/Forms/Register/RegisterDocumentForm";
 import RegisterBankDetailsForm from "../../components/Forms/Register/RegisterBankDetailsForm";
 
-const Register = ({ navigation }) => {
-  const [activeFlowTab, setActiveFlowTab] = useState(8);
+const Register = ({ route }) => {
+  console.log(route.params);
+  const [activeFlowTab, setActiveFlowTab] = useState(1);
   const [state, setState] = useState({
     companyEmail: "",
     companyPhone: "",
@@ -338,10 +339,11 @@ const Register = ({ navigation }) => {
         count={8}
         active={activeFlowTab}
         navigatePrev={handleChangeBackNavigation}
+        noGoBack
       />
 
       <View style={styles.container}>
-        <View style={{ flex: 9 }}>
+        <View style={{ flex: 1 }}>
           <View style={styles.section}>
             {activeFlowTab === 1 && (
               <View style={{ flex: 1 }}>
@@ -676,8 +678,12 @@ const Register = ({ navigation }) => {
         </View>
         <View
           style={{
-            flex: 0.7,
             backgroundColor: COLORS.white,
+            flexDirection: "row",
+            justifyContent: "space-between",
+            paddingVertical: 10,
+            borderTopWidth: 1,
+            borderTopColor: COLORS.lightGrey,
           }}
         >
           <View style={{ ...styles.section, justifyContent: "center" }}>
@@ -715,8 +721,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
     width: "100%",
-    paddingTop: 10,
-    paddingBottom: 10,
+    height: 40,
     borderRadius: 50,
   },
   disableMainButton: {

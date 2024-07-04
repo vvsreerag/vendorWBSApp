@@ -18,6 +18,7 @@ import {
   Ionicons,
 } from "@expo/vector-icons";
 import { useNavigation } from "@react-navigation/native";
+import ManageRequestSkeleton from "../../Skeleton/ManageRequestSkeleton";
 
 const { width } = Dimensions.get("window");
 
@@ -125,6 +126,7 @@ const Dashboard = () => {
         <CurvyTextInputComponents placeholder="Search by Syndicate Number" />
         <View>
           <Tabs tabs={tabs} activeTab={activeTab} setActiveTab={setActiveTab} />
+
           <ScrollView showsVerticalScrollIndicator={false}>
             {filteredItems.map((item) => {
               const progress = (item.scanned / item.total) * 100;

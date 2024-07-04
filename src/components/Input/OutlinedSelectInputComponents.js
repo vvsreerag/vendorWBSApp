@@ -65,6 +65,7 @@ const OutlinedSelectInput = ({
   children,
   defaultValue = null,
   placeHolder,
+  style,
 }) => {
   const [isModalVisible, setIsModalVisible] = useState(false);
   const [selectedOption, setSelectedOption] = useState(null);
@@ -88,7 +89,7 @@ const OutlinedSelectInput = ({
   };
 
   return (
-    <View style={styles.container}>
+    <View style={[styles.container, style]}>
       <TouchableOpacity
         style={styles.selectContainer}
         onPress={() => setIsModalVisible(true)}

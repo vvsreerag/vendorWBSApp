@@ -11,6 +11,7 @@ import AuthSteppedHeaderComponents from "../../components/AuthSteppedHeaderCompo
 import OutlinedTextInput from "../../components/Input/OutlinedTextInputComponents";
 import LoginForm from "../../components/Forms/Login/LoginForm";
 import { useNavigation } from "@react-navigation/native";
+import GoogleAuthentication from "../../components/GoogleAuthentication";
 
 const Login = () => {
   const [activeFlowTab, setActiveFlowTab] = useState(1);
@@ -34,6 +35,7 @@ const Login = () => {
 
         <View style={styles.orContinue}>
           <Text style={styles.orContinueText}>Or Continue With</Text>
+          <GoogleAuthentication />
         </View>
       </View>
       <View style={{ ...styles.bottomText, flexDirection: "row" }}>

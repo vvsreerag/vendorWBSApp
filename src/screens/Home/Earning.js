@@ -13,6 +13,7 @@ import SingleShowCaseMenuItems from "../../components/Menu/SingleShowCaseMenuIte
 import { FontAwesome6, Ionicons, MaterialIcons } from "@expo/vector-icons";
 import MenuItemGroup from "../../components/Menu/MenuItemGroup";
 import MenuItem from "../../components/Menu/MenuItem";
+import EarningSkeleton from "../../Skeleton/EarningSkeleton";
 
 const Earning = () => {
   const [selectedTab, setSelectedTab] = useState("weekly");
@@ -71,7 +72,7 @@ const Earning = () => {
           {renderTab("weekly", "Weekly")}
           {renderTab("monthly", "Monthly")}
         </View>
-
+        {/* <EarningSkeleton /> */}
         <View style={styles.dateContainer}>
           <Text style={styles.statsValue}>{dateRange}</Text>
         </View>

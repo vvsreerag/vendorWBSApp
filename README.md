@@ -24,4 +24,4 @@ To deploy it in APK.
 
 Use below command and change the {expo-link} with your running expo project.
 
-`npx uri-scheme open {expo-link}/--/vendor-register/h74huwhiwh8jhfuhr9w3h00sjf --android`
+`npx uri-scheme open {expo-link}/--/vendor-register/h74AEFGhhFEsh8jhfWWEr9w3h00sjf --android`

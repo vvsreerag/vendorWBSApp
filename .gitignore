@@ -2,6 +2,8 @@
 
 # dependencies
 node_modules/
+.well-known/
+document/
 # Expo
 .expo/
 dist/
